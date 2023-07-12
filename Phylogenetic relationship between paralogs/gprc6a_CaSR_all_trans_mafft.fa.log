@@ -1,0 +1,211 @@
+Physical cores: 16
+Logical cores:  32
+Memory:         126GB
+Extensions:     AVX
+
+WARNING: MSA has not enough sites to infer reliable results
+Validating binary checkpoint
+OK!
+--------------------------------------------------------------------------------
+ModelTest-NG vx.y.z
+
+Input data:
+  MSA:        gprc6a_CaSR_all_trans_mafft.fa
+  Tree:       Maximum parsimony
+    file:           -
+  #taxa:            130
+  #sites:           20273
+  #patterns:        11563
+  Max. thread mem:  738 MB
+
+Output:
+  Log:           gprc6a_CaSR_all_trans_mafft.fa.log
+  Starting tree: gprc6a_CaSR_all_trans_mafft.fa.tree
+  Results:       gprc6a_CaSR_all_trans_mafft.fa.out
+
+Selection options:
+  # dna schemes:      11
+  # dna models:       88
+  include model parameters:
+    Uniform:         true
+    p-inv (+I):      true
+    gamma (+G):      true
+    both (+I+G):     true
+    free rates (+R): false
+    fixed freqs:     true
+    estimated freqs: true
+    #categories:     4
+  gamma rates mode:   mean
+  asc bias:           none
+  epsilon (opt):      0.01
+  epsilon (par):      0.05
+  keep branches:      false
+
+Additional options:
+  verbosity:        very low
+  threads:          1/16
+  RNG seed:         12345
+  subtree repeats:  enabled
+--------------------------------------------------------------------------------
+modeltest was called as follows: 
+>> modeltest-ng -i gprc6a_CaSR_all_trans_mafft.fa -d nt 
+
+
+modeltest: Warning: You are using one single thread out of 16 physical cores.
+modeltest:          You can set the number of threads with -p argument.
+modeltest: Try 'modeltest --help' or 'modeltest --usage' for more information
+
+Partition 1/1
+
+ ----ID---  ----MODEL---- ---Time--- -Elapsed--- -------LnL------- -Alpha- -P-inv-
+
+Computation of likelihood scores completed. It took 0h:20:42
+
+BIC       model              K            lnL          score          delta    weight
+--------------------------------------------------------------------------------
+       1  TPM3uf+I+G4        7   -348562.2499    699742.5998         0.0000    0.9088
+       2  TIM3+I+G4          8   -348559.7985    699747.6141         5.0143    0.0741
+       3  GTR+I+G4          10   -348551.4069    699750.6648         8.0651    0.0161
+       4  TVM+I+G4           9   -348559.1406    699756.2153        13.6155    0.0010
+       5  TPM1uf+I+G4        7   -348710.8636    700039.8272       297.2275    0.0000
+       6  TIM1+I+G4          8   -348709.4639    700046.9448       304.3450    0.0000
+       7  HKY+I+G4           6   -348721.0433    700050.2696       307.6698    0.0000
+       8  TPM2uf+I+G4        7   -348718.2365    700054.5729       311.9731    0.0000
+       9  TIM2+I+G4          8   -348713.9171    700055.8512       313.2515    0.0000
+      10  TrN+I+G4           7   -348720.4009    700058.9017       316.3019    0.0000
+--------------------------------------------------------------------------------
+Best model according to BIC
+---------------------------
+Model:              TPM3uf+I+G4
+lnL:                -348562.2499
+Frequencies:        0.2925 0.2208 0.2035 0.2833
+Subst. Rates:       1.4206 4.0988 1.0000 1.4206 4.0988 1.0000 
+Inv. sites prop:    0.0215
+Gamma shape:        1.0709
+Score:              699742.5998
+Weight:             0.9088
+---------------------------
+Parameter importances
+---------------------------
+P.Inv:              -
+Gamma:              0.0000
+Gamma-Inv:          1.0000
+Frequencies:        1.0000
+---------------------------
+Model averaged estimates
+---------------------------
+P.Inv:              -
+Alpha:              0.9410
+Alpha-P.Inv:        1.0711
+P.Inv-Alpha:        0.0215
+Frequencies:        0.2926 0.2206 0.2037 0.2831 
+
+Commands:
+  > phyml  -i gprc6a_CaSR_all_trans_mafft.fa -m 012012 -f m -v e -a e -c 4 -o tlr
+  > raxmlHPC-SSE3 -s gprc6a_CaSR_all_trans_mafft.fa -m GTRGAMMAIX -n EXEC_NAME -p PARSIMONY_SEED
+  > raxml-ng --msa gprc6a_CaSR_all_trans_mafft.fa --model TPM3uf+I+G4
+  > paup -s gprc6a_CaSR_all_trans_mafft.fa
+  > iqtree -s gprc6a_CaSR_all_trans_mafft.fa -m TPM3uf+I+G4
+
+AIC       model              K            lnL          score          delta    weight
+--------------------------------------------------------------------------------
+       1  GTR+I+G4          10   -348551.4069    697636.8138         0.0000    0.9968
+       2  TIM3+I+G4          8   -348559.7985    697649.5971        12.7833    0.0017
+       3  TVM+I+G4           9   -348559.1406    697650.2813        13.4675    0.0012
+       4  TPM3uf+I+G4        7   -348562.2499    697652.4998        15.6861    0.0004
+       5  TIM1+I+G4          8   -348709.4639    697948.9278       312.1140    0.0000
+       6  TPM1uf+I+G4        7   -348710.8636    697949.7273       312.9135    0.0000
+       7  TIM2+I+G4          8   -348713.9171    697957.8342       321.0205    0.0000
+       8  TPM2uf+I+G4        7   -348718.2365    697964.4730       327.6592    0.0000
+       9  HKY+I+G4           6   -348721.0433    697968.0867       331.2729    0.0000
+      10  TrN+I+G4           7   -348720.4009    697968.8017       331.9880    0.0000
+--------------------------------------------------------------------------------
+Best model according to AIC
+---------------------------
+Model:              GTR+I+G4
+lnL:                -348551.4069
+Frequencies:        0.2925 0.2193 0.2069 0.2812
+Subst. Rates:       1.4985 4.0492 1.0299 1.3704 4.2489 1.0000 
+Inv. sites prop:    0.0218
+Gamma shape:        1.1123
+Score:              697636.8138
+Weight:             0.9968
+---------------------------
+Parameter importances
+---------------------------
+P.Inv:              -
+Gamma:              0.0000
+Gamma-Inv:          1.0000
+Frequencies:        1.0000
+---------------------------
+Model averaged estimates
+---------------------------
+P.Inv:              -
+Alpha:              0.9370
+Alpha-P.Inv:        1.1122
+P.Inv-Alpha:        0.0218
+Frequencies:        0.2925 0.2193 0.2069 0.2812 
+
+Commands:
+  > phyml  -i gprc6a_CaSR_all_trans_mafft.fa -m 012345 -f m -v e -a e -c 4 -o tlr
+  > raxmlHPC-SSE3 -s gprc6a_CaSR_all_trans_mafft.fa -m GTRGAMMAIX -n EXEC_NAME -p PARSIMONY_SEED
+  > raxml-ng --msa gprc6a_CaSR_all_trans_mafft.fa --model GTR+I+G4
+  > paup -s gprc6a_CaSR_all_trans_mafft.fa
+  > iqtree -s gprc6a_CaSR_all_trans_mafft.fa -m GTR+I+G4
+
+AICc      model              K            lnL          score          delta    weight
+--------------------------------------------------------------------------------
+       1  GTR+I+G4          10   -348551.4069    697643.8138         0.0000    0.9965
+       2  TIM3+I+G4          8   -348559.7985    697656.5971        12.7833    0.0017
+       3  TVM+I+G4           9   -348559.1406    697657.2813        13.4675    0.0012
+       4  TPM3uf+I+G4        7   -348562.2499    697658.4998        14.6861    0.0006
+       5  TPM1uf+I+G4        7   -348710.8636    697955.7273       311.9135    0.0000
+       6  TIM1+I+G4          8   -348709.4639    697955.9278       312.1140    0.0000
+       7  TIM2+I+G4          8   -348713.9171    697964.8342       321.0205    0.0000
+       8  TPM2uf+I+G4        7   -348718.2365    697970.4730       326.6592    0.0000
+       9  HKY+I+G4           6   -348721.0433    697974.0867       330.2729    0.0000
+      10  TrN+I+G4           7   -348720.4009    697974.8017       330.9880    0.0000
+--------------------------------------------------------------------------------
+Best model according to AICc
+---------------------------
+Model:              GTR+I+G4
+lnL:                -348551.4069
+Frequencies:        0.2925 0.2193 0.2069 0.2812
+Subst. Rates:       1.4985 4.0492 1.0299 1.3704 4.2489 1.0000 
+Inv. sites prop:    0.0218
+Gamma shape:        1.1123
+Score:              697643.8138
+Weight:             0.9965
+---------------------------
+Parameter importances
+---------------------------
+P.Inv:              -
+Gamma:              0.0000
+Gamma-Inv:          1.0000
+Frequencies:        1.0000
+---------------------------
+Model averaged estimates
+---------------------------
+P.Inv:              -
+Alpha:              0.9371
+Alpha-P.Inv:        1.1122
+P.Inv-Alpha:        0.0218
+Frequencies:        0.2925 0.2193 0.2069 0.2812 
+
+Commands:
+  > phyml  -i gprc6a_CaSR_all_trans_mafft.fa -m 012345 -f m -v e -a e -c 4 -o tlr
+  > raxmlHPC-SSE3 -s gprc6a_CaSR_all_trans_mafft.fa -m GTRGAMMAIX -n EXEC_NAME -p PARSIMONY_SEED
+  > raxml-ng --msa gprc6a_CaSR_all_trans_mafft.fa --model GTR+I+G4
+  > paup -s gprc6a_CaSR_all_trans_mafft.fa
+  > iqtree -s gprc6a_CaSR_all_trans_mafft.fa -m GTR+I+G4
+Summary:
+
+Partition 1/1:
+                         Model         Score        Weight
+----------------------------------------------------------
+       BIC         TPM3uf+I+G4   699742.5998        0.9088
+       AIC            GTR+I+G4   697636.8138        0.9968
+      AICc            GTR+I+G4   697643.8138        0.9965
+
+Execution results written to gprc6a_CaSR_all_trans_mafft.fa.out
+Starting tree written to gprc6a_CaSR_all_trans_mafft.fa.tree
