@@ -2,7 +2,7 @@
 | Species | Group | 3'_disrupted_exons | 5'_disrupted_exons | ORF | Query | Subject | Query_length | Alignment_length | Q_start | Q_end | S_start | S_end | E_value | Bit_score | %_Query_cov | %_ident | Gaps | Strand |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | 1.Acrobates_pygmaeus | Acrobatidae | - | - | ❌ | * | * | * | * | * | * | * | * | * | * | * | * | * | * |
-- | - | - | - | - | - | - | - | - | - | - | - | - | - | - | - | - | - | -
+| - | - | - | - | - | - | - | - | - | - | - | - | - | - | - | - | - | - | - |
 2.Antechinus_flavipes | Dasyuridae | - | - | ✅ | * | * | * | * | * | * | * | * | * | * | * | * | * | *
 - | - | - | - | - | exon_1 | CM028220.1 | 194 | 194 | 1 | 194 | 296599254 | 296599061 | 7.42e-65 | 251 | 100 | 88.660 | 0 | minus
 - | - | - | - | - | exon_2 | CM028220.1 | 304 | 304 | 1 | 304 | 296595460 | 296595157 | 2.72e-117 | 427 | 100 | 91.118 | 0 | minus
