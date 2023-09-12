@@ -1,4 +1,3 @@
-
 | Species | Group | 3'_disrupted_exons | 5'_disrupted_exons | ORF | Query | Subject | Query_length | Alignment_length | Q_start | Q_end | S_start | S_end | E_value | Bit_score | %_Query_cov | %_ident | Gaps | Strand |
 | :-- | :-- | :-- | :-- | :-- | :-- | :-- | :-- | :-- | :-- | :-- | :-- | :-- | :-- | :-- | :-- | :-- | :-- | :-- |
 | 1.Acrobates_pygmaeus | Acrobatidae | - | - | ❌ | * | * | * | * | * | * | * | * | * | * | * | * | * | * |
