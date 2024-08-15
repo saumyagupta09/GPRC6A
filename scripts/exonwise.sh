@@ -2,7 +2,7 @@
 
 # $1 is the input file, which should be the output from running the following BLAST command:
 # time blastn -task blastn -query query.fa -db genome.fa -evalue 0.001 -outfmt "6 qseqid sseqid qlen length qstart qend sstart send sstrand evalue bitscore sseq" -out example_file.out
-# $2 is the reference genome file.
+# $2 is the reference genome file. (Genome GCA_028451465.1 is used in the example)
 
 # An example input file, named 'example_file.out', is provided for this script. Please refer to it to understand the expected input format.
 
