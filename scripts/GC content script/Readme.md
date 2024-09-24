@@ -7,7 +7,7 @@ This repository contains scripts for analyzing GC content in genomic sequences o
 1. **`gc_content_windows.sh`**  
    This script generates GC content data in 100 bp windows from the provided genomic sequence. 
 
-2. **`plot_gc_content.R`**  
+2. **`<species_name>_plot.R`**  
    This R script visualizes the GC content data generated from the previous script.
 
 ## Usage Instructions
