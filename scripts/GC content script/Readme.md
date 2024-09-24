@@ -28,11 +28,9 @@ This repository contains scripts for analyzing GC content in genomic sequences o
 Replace <species_name> with the name of the species (e.g., Chinchilla_lanigera), <blast_output_file> with the name of the output file (e.g., Heterocephalus_glaber_on_Chinchilla_lanigera_outfmt6_final.out), and <genome_file> with the path to the genome file.
 
 2. **Execute the species-specific R script**
+
 After generating the required output files, run the following command to visualize the GC content:
 
 ```bash
 ./<species_name>_plot.R
 Replace <species_name> with the name of the species. Ensure that this script is run in the same directory where both <species_name>_gcpcnt.bed and <species_name>_absolute_lengths.txt files are located. This will create a PDF plot named <species_name>_gccontent_plot.pdf.
-
-### Example Files
-Included in this repository is an example BLAST output file (Heterocephalus_glaber_on_Chinchilla_lanigera_outfmt6_final.out). You can use this file to test the scripts before running them on your own data.
