@@ -32,6 +32,7 @@ Replace <species_name> with the name of the species (e.g., Chinchilla_lanigera),
 After generating the required output files, run the following command to visualize the GC content:
 
 ```bash
-./<species_name>_plot.R <output_file>
+./<species_name>_plot.R
+```
 Replace <species_name> with the name of the species. Ensure that this script is run in the same directory where both <species_name>_gcpcnt.bed and <species_name>_absolute_lengths.txt files are located. This will create a PDF plot named <species_name>_gccontent_plot.pdf. 
 
