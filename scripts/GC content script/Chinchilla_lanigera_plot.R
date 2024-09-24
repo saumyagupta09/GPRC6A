@@ -4,7 +4,7 @@ library(ggplot2)
 
 # Set input data files
 input_file <- "Chinchilla_lanigera_gcpcnt.bed"  
-rectangles_file <- "Chinchilla_lanigera_absolute_lengths.txt" 
+rectangles_file <- "new_Chinchilla_lanigera_absolute_lengths.txt" 
 
 # Read the input data
 data <- read.table(input_file, header = FALSE, sep = "\t", stringsAsFactors = FALSE, 
