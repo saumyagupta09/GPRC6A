@@ -6,7 +6,7 @@ This repository contains data, scripts, and output files used to investigate the
 
 | File | Description |
 |------|-------------|
-| `Terrestrial_Aquatic_species.nwk` | Phylogenetic tree in Newick format containing species with trophic and gene presence data. |
+| `Terrestrial_Aquatic_species.nwk` | Phylogenetic tree in Newick format containing species. |
 | `Terrestrial_Aquatic.tsv` | Metadata table including species, gene status (binary), and trophic level. |
 | `collapsed_tree_with_traits.nexus` | Collapsed version of the phylogenetic tree, annotated with traits, ready for visualization in FigTree or similar tools. |
 | `collapsed_clade_summary.tsv` | Summary of the clades that were collapsed, including species count, trait values, average branch lengths, and depths. |
