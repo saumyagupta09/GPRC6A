@@ -46,6 +46,14 @@ run_pairwise_phylANOVA("Carnivore", "Herbivore")
 run_pairwise_phylANOVA("Carnivore", "Omnivore")
 run_pairwise_phylANOVA("Herbivore", "Omnivore")
 
+subset_data <- data[data$TrophicLevel %in% c("Carnivore", "Herbivore", "Omnivore"), ]
+subset_tree <- drop.tip(tree, setdiff(tree$tip.label, subset_data$Species))
+
+
+trophic <- setNames(as.factor(subset_data$TrophicLevel), subset_data$Species)
+gene_status_subset <- setNames(subset_data$gene_status, subset_data$Species)
+
+phylANOVA(subset_tree, x = trophic, y = gene_status_subset, nsim = 1000)
 
 
 
