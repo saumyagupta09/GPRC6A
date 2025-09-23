@@ -13,3 +13,70 @@ P-value (simulated): 0.523
  Herbivore vs Omnivore 
 F-value: 24.96 
 P-value (simulated): 0.002 
+
+> subset_data <- data[data$TrophicLevel %in% c("Carnivore", "Herbivore", "Omnivore"), ]
+>   subset_tree <- drop.tip(tree, setdiff(tree$tip.label, subset_data$Species))
+> 
+> 
+>   trophic <- setNames(as.factor(subset_data$TrophicLevel), subset_data$Species)
+>   gene_status_subset <- setNames(subset_data$gene_status, subset_data$Species)
+> 
+> phylANOVA(subset_tree, x = trophic, y = gene_status_subset, nsim = 1000)
+ANOVA table: Phylogenetic ANOVA
+
+Response: y
+            Sum Sq  Mean Sq   F value Pr(>F)
+x         4.097533 2.048766 16.467645  0.063
+Residual 23.140562 0.124412                 
+
+P-value based on simulation.
+---------
+
+Pairwise posthoc test using method = "holm"
+
+Pairwise t-values:
+          Carnivore Herbivore  Omnivore
+Carnivore  0.000000  4.258076 -1.191925
+Herbivore -4.258076  0.000000 -5.333194
+Omnivore   1.191925  5.333194  0.000000
+
+Pairwise corrected P-values:
+          Carnivore Herbivore Omnivore
+Carnivore     1.000     0.286    0.674
+Herbivore     0.286     1.000    0.006
+Omnivore      0.674     0.006    1.000
+---------
+
+> 
+> subset_data <- data[data$TrophicLevel %in% c("Carnivore", "Herbivore", "Omnivore"), ]
+> subset_tree <- drop.tip(tree, setdiff(tree$tip.label, subset_data$Species))
+> 
+> 
+> trophic <- setNames(as.factor(subset_data$TrophicLevel), subset_data$Species)
+> gene_status_subset <- setNames(subset_data$gene_status, subset_data$Species)
+> 
+> phylANOVA(subset_tree, x = trophic, y = gene_status_subset, nsim = 5000)
+ANOVA table: Phylogenetic ANOVA
+
+Response: y
+            Sum Sq  Mean Sq   F value Pr(>F)
+x         4.097533 2.048766 16.467645 0.0782
+Residual 23.140562 0.124412                 
+
+P-value based on simulation.
+---------
+
+Pairwise posthoc test using method = "holm"
+
+Pairwise t-values:
+          Carnivore Herbivore  Omnivore
+Carnivore  0.000000  4.258076 -1.191925
+Herbivore -4.258076  0.000000 -5.333194
+Omnivore   1.191925  5.333194  0.000000
+
+Pairwise corrected P-values:
+          Carnivore Herbivore Omnivore
+Carnivore    1.0000    0.2792   0.6878
+Herbivore    0.2792    1.0000   0.0042
+Omnivore     0.6878    0.0042   1.0000
+---------
