@@ -1,0 +1,233 @@
+
+Analysis Description
+--------------------
+aBSREL (Adaptive branch-site random effects likelihood) uses an adaptive
+random effects branch-site model framework to test whether each branch
+has evolved under positive selection, using a procedure which infers an
+optimal number of rate categories per branch. v2.2 adds support for
+multiple-hit models. v2.3 adds support for SRV. v2.5 adds support for
+ancestral state reconstruction, identification of sites contributing to
+selection signal, and some diagnostics. 
+
+- __Requirements__: in-frame codon alignment and a phylogenetic tree
+
+- __Citation__:  Less Is More: An Adaptive Branch-Site Random Effects Model for
+Efficient Detection of Episodic Diversifying Selection (2015). Mol Biol
+Evol 32 (5): 1342-1353. 
+
+- __Written by__: Sergei L Kosakovsky Pond, Ben Murrell, Steven Weaver and Temple iGEM /
+UCSD viral evolution group
+
+- __Contact Information__: spond@temple.edu
+
+- __Analysis Version__: 2.5
+
+[Advanced option] Bag of little bootstrap alignment resampling rate (permissible range = [0.01,1], default value = 1): blb: 1
+
+>code => Universal
+
+-------
+>[WARNING]
+'/media/ceglab27/Saumya/GPRC6A/HYPHY/ABSREL/Primates_Scandentia_Dermoptera/Primates_Scandentia_Dermoptera_relax.aln'
+contains 1 duplicate sequence. Identical sequences do not contribute any
+information to the analysis and only slow down computation. Please
+consider removing duplicate or 'nearly' duplicate sequences, e.g. using
+https://github.com/veg/hyphy-analyses/tree/master/remove-duplicates
+prior to running selection analyses
+-------
+/media/ceglab27/Saumya/GPRC6A/HYPHY/ABSREL/Primates_Scandentia_Dermoptera/Primates_Scandentia_Dermoptera.aln.treefile
+Primates_Scandentia_Dermoptera.aln.treefile
+
+>Loaded a multiple sequence alignment with **37** sequences, **929** codons, and **1** partitions from `/media/ceglab27/Saumya/GPRC6A/HYPHY/ABSREL/Primates_Scandentia_Dermoptera/Primates_Scandentia_Dermoptera_relax.aln`
+
+>branches => All
+
+>multiple-hits => None
+
+>srv => No
+
+
+### * Selected 71 branches for testing: `Aotus_nancymaae, Saimiri_boliviensis, Cebus_imitator, Sapajus_apella, Node5, Callithrix_jacchus, Node4, Cercocebus_atys, Colobus_angolensis, Node17, Mandrillus_leucophaeus, Node16, Papio_anubis, Node15, Theropithecus_gelada, Node14, Macaca_fascicularis, Macaca_mulatta, Node25, Macaca_thibetana, Node24, Macaca_nemestrina, Node23, Node13, Chlorocebus_sabaeus, Node12, Piliocolobus_tephrosceles, Rhinopithecus_bieti, Rhinopithecus_roxellana, Node34, Trachypithecus_francoisi, Node33, Node31, Node11, Homo_sapiens, Pan_paniscus, Node40, Pongo_abelii, Pongo_pygmaeus, Node43, Node39, Hylobates_moloch, Nomascus_leucogenys, Symphalangus_syndactylus, Node48, Node46, Node38, Node10, Gorilla_gorilla, Eulemur_rufifrons, Lemur_catta, Node57, Propithecus_coquereli, Microcebus_murinus, Node60, Node56, Nycticebus_coucang, Otolemur_garnettii, Node63, Node55, Cynocephalus_volans, Galeopterus_variegatus, Node67, Tupaia_chinensis, Node66, Node54, Carlito_syrichta, Node53, Node51, Node9, Node3`
+
+
+### Obtaining branch lengths and nucleotide substitution biases under the nucleotide GTR model
+
+>kill-zero-lengths => Yes
+* Log(L) = -13583.43, AIC-c = 27324.99 (79 estimated parameters)
+* 1 partition. Total tree length by partition (subs/site)  0.642
+
+### Fitting the baseline model with a single dN/dS class per branch, and no site-to-site variation. 
+* Log(L) = -13113.12, AIC-c = 26539.67 (156 estimated parameters)
+* Branch-level non-synonymous/synonymous rate ratio distribution has median  0.35, and 95% of the weight in  0.06 - 10000000000.00
+
+### Determining the optimal number of rate classes per branch using a step up procedure
+
+|              Branch               |  Length  |  Rates   |     Max. dN/dS     |    Log(L)     |     AIC-c     |Best AIC-c so far|
+|-----------------------------------|----------|----------|--------------------|---------------|---------------|-----------------|
+|         Carlito_syrichta          |   0.11   |    2     |    0.99 (26.40%)   |   -13109.09   |   26535.65    |    26535.65     |
+|         Carlito_syrichta          |   0.11   |    3     |    0.99 (25.76%)   |   -13109.09   |   26539.69    |    26535.65     |
+|         Tupaia_chinensis          |   0.08   |    2     |    0.52 (45.04%)   |   -13108.47   |   26538.44    |    26535.65     |
+|              Node67               |   0.04   |    2     |    1.63 (25.38%)   |   -13107.30   |   26536.12    |    26535.65     |
+|              Node63               |   0.04   |    2     |    0.79 ( 5.17%)   |   -13109.09   |   26539.68    |    26535.65     |
+|        Otolemur_garnettii         |   0.03   |    2     |    2.76 ( 8.13%)   |   -13105.18   |   26531.88    |    26531.88     |
+|        Otolemur_garnettii         |   0.03   |    3     |    2.76 ( 8.13%)   |   -13105.18   |   26535.91    |    26531.88     |
+|        Nycticebus_coucang         |   0.02   |    2     |    0.32 (45.99%)   |   -13105.18   |   26535.91    |    26531.88     |
+|          Gorilla_gorilla          |   0.02   |    2     |    6.69 ( 5.59%)   |   -13102.71   |   26530.97    |    26530.97     |
+|          Gorilla_gorilla          |   0.02   |    3     |    6.70 ( 5.59%)   |   -13102.71   |   26535.01    |    26530.97     |
+|              Node53               |   0.02   |    2     |    5.48 ( 7.97%)   |   -13098.01   |   26525.61    |    26525.61     |
+|              Node53               |   0.02   |    3     |    6.38 ( 6.08%)   |   -13098.03   |   26529.69    |    26525.61     |
+|        Microcebus_murinus         |   0.02   |    2     |   0.12 (100.00%)   |   -13098.01   |   26529.65    |    26525.61     |
+|        Callithrix_jacchus         |   0.02   |    2     |    0.52 (17.85%)   |   -13098.01   |   26529.65    |    26525.61     |
+|              Node51               |   0.02   |    2     |   21.64 ( 1.84%)   |   -13093.42   |   26520.46    |    26520.46     |
+|              Node51               |   0.02   |    3     |   64.82 ( 0.73%)   |   -13093.21   |   26524.09    |    26520.46     |
+|               Node9               |   0.02   |    2     |    0.63 (11.27%)   |   -13093.42   |   26524.50    |    26520.46     |
+|              Node56               |   0.01   |    2     |   21.61 ( 6.07%)   |   -13089.75   |   26517.17    |    26517.17     |
+|              Node56               |   0.01   |    3     |   25.63 ( 4.72%)   |   -13089.76   |   26521.22    |    26517.17     |
+|        Saimiri_boliviensis        |   0.01   |    2     |    9.15 ( 1.38%)   |   -13089.64   |   26520.99    |    26517.17     |
+|              Node55               |   0.01   |    2     |  142.05 ( 0.20%)   |   -13087.54   |   26516.78    |    26516.78     |
+|              Node55               |   0.01   |    3     |  145.22 ( 0.20%)   |   -13087.53   |   26520.80    |    26516.78     |
+|          Aotus_nancymaae          |   0.01   |    2     |    0.78 (52.98%)   |   -13087.54   |   26520.82    |    26516.78     |
+|      Galeopterus_variegatus       |   0.01   |    2     |    0.30 (91.15%)   |   -13087.54   |   26520.82    |    26516.78     |
+|       Propithecus_coquereli       |   0.01   |    2     |    0.28 (72.42%)   |   -13087.54   |   26520.81    |    26516.78     |
+|        Colobus_angolensis         |   0.01   |    2     |    0.40 (91.34%)   |   -13087.54   |   26520.82    |    26516.78     |
+|              Node43               |   0.01   |    2     |   10.06 ( 6.10%)   |   -13085.55   |   26516.85    |    26516.78     |
+|        Cynocephalus_volans        |   0.01   |    2     |    0.48 (49.31%)   |   -13087.54   |   26520.82    |    26516.78     |
+|               Node5               |   0.01   |    2     |    0.67 (27.68%)   |   -13087.54   |   26520.82    |    26516.78     |
+|            Lemur_catta            |   0.01   |    2     |    8.21 ( 4.92%)   |   -13087.21   |   26520.16    |    26516.78     |
+|              Node66               |   0.01   |    2     |    0.39 (34.34%)   |   -13087.54   |   26520.82    |    26516.78     |
+|              Node57               |   0.01   |    2     |    0.27 ( 0.00%)   |   -13087.53   |   26520.80    |    26516.78     |
+|              Node40               |   0.01   |    2     |    0.40 (75.70%)   |   -13087.54   |   26520.82    |    26516.78     |
+|     Piliocolobus_tephrosceles     |   0.01   |    2     |   21.26 ( 1.94%)   |   -13084.26   |   26514.27    |    26514.27     |
+|     Piliocolobus_tephrosceles     |   0.01   |    3     |   22.58 ( 1.77%)   |   -13084.27   |   26518.33    |    26514.27     |
+|         Eulemur_rufifrons         |   0.01   |    2     |    0.30 (96.38%)   |   -13084.26   |   26518.30    |    26514.27     |
+|              Node11               |   0.01   |    2     |    0.52 ( 0.00%)   |   -13084.26   |   26518.31    |    26514.27     |
+|              Node46               |   0.01   |    2     |    0.49 ( 7.91%)   |   -13084.27   |   26518.31    |    26514.27     |
+|        Chlorocebus_sabaeus        |   0.01   |    2     |    0.23 (86.96%)   |   -13084.26   |   26518.31    |    26514.27     |
+|          Cebus_imitator           |   0.00   |    2     |    0.40 (75.00%)   |   -13084.27   |   26518.31    |    26514.27     |
+|          Sapajus_apella           |   0.00   |    2     |    0.50 (25.00%)   |   -13084.26   |   26518.31    |    26514.27     |
+|              Node38               |   0.00   |    2     |    0.49 (48.37%)   |   -13084.26   |   26518.31    |    26514.27     |
+|     Symphalangus_syndactylus      |   0.00   |    2     |    0.25 (20.00%)   |   -13084.26   |   26518.31    |    26514.27     |
+|              Node10               |   0.00   |    2     |    0.57 ( 9.78%)   |   -13084.26   |   26518.31    |    26514.27     |
+|           Papio_anubis            |   0.00   |    2     |    2.04 ( 0.00%)   |   -13084.27   |   26518.31    |    26514.27     |
+|              Node54               |   0.00   |    2     |    0.73 ( 5.29%)   |   -13084.22   |   26518.22    |    26514.27     |
+|              Node31               |   0.00   |    2     |    1.94 (50.81%)   |   -13084.27   |   26518.31    |    26514.27     |
+|         Hylobates_moloch          |   0.00   |    2     |    0.75 (20.00%)   |   -13084.26   |   26518.31    |    26514.27     |
+|              Node12               |   0.00   |    2     |    0.38 (75.44%)   |   -13084.27   |   26518.31    |    26514.27     |
+|              Node60               |   0.00   |    2     |    0.47 (50.00%)   |   -13084.25   |   26518.27    |    26514.27     |
+|           Pan_paniscus            |   0.00   |    2     |    0.21 (79.00%)   |   -13084.26   |   26518.31    |    26514.27     |
+|           Homo_sapiens            |   0.00   |    2     |  396.86 ( 0.98%)   |   -13080.11   |   26510.01    |    26510.01     |
+|           Homo_sapiens            |   0.00   |    3     |  394.75 ( 0.97%)   |   -13080.11   |   26514.05    |    26510.01     |
+|        Nomascus_leucogenys        |   0.00   |    2     |    0.95 (83.95%)   |   -13080.11   |   26514.05    |    26510.01     |
+|     Trachypithecus_francoisi      |   0.00   |    2     |    0.85 ( 0.00%)   |   -13080.11   |   26514.05    |    26510.01     |
+|         Macaca_thibetana          |   0.00   |    2     |    0.25 (20.00%)   |   -13080.11   |   26514.05    |    26510.01     |
+|              Node34               |   0.00   |    2     |    0.25 (23.42%)   |   -13080.11   |   26514.05    |    26510.01     |
+|       Theropithecus_gelada        |   0.00   |    2     |    0.20 (52.19%)   |   -13080.11   |   26514.05    |    26510.01     |
+|         Macaca_nemestrina         |   0.00   |    2     |    0.48 (24.30%)   |   -13080.11   |   26514.05    |    26510.01     |
+|        Rhinopithecus_bieti        |   0.00   |    2     |    5.65 (14.15%)   |   -13080.12   |   26514.06    |    26510.01     |
+|              Node33               |   0.00   |    2     |    1.88 (53.47%)   |   -13080.11   |   26514.05    |    26510.01     |
+|      Rhinopithecus_roxellana      |   0.00   |    2     |    1.98 (48.37%)   |   -13080.11   |   26514.05    |    26510.01     |
+|              Node39               |   0.00   |    2     |  >1000 (100.00%)   |   -13080.11   |   26514.05    |    26510.01     |
+|              Node13               |   0.00   |    2     |    0.25 (10.00%)   |   -13080.11   |   26514.05    |    26510.01     |
+|      Mandrillus_leucophaeus       |   0.00   |    2     |    0.47 ( 3.09%)   |   -13080.11   |   26514.05    |    26510.01     |
+|              Node25               |   0.00   |    2     |    1.46 ( 1.10%)   |   -13080.11   |   26514.05    |    26510.01     |
+|              Node17               |   0.00   |    2     |    1.91 ( 4.30%)   |   -13080.11   |   26514.05    |    26510.01     |
+|               Node4               |   0.00   |    2     |    0.00 ( 5.00%)   |   -13080.11   |   26514.05    |    26510.01     |
+|              Node16               |   0.00   |    2     |    0.00 ( 5.00%)   |   -13080.11   |   26514.05    |    26510.01     |
+|          Macaca_mulatta           |   0.00   |    2     |   1.00 (100.00%)   |   -13080.82   |   26515.46    |    26510.01     |
+|              Node23               |   0.00   |    2     |    0.71 ( 8.55%)   |   -13080.11   |   26514.05    |    26510.01     |
+|              Node48               |   0.00   |    2     |    0.50 (23.62%)   |   -13080.11   |   26514.05    |    26510.01     |
+|              Node15               |   0.00   |    2     |    0.00 ( 5.00%)   |   -13080.11   |   26514.05    |    26510.01     |
+|              Node14               |   0.00   |    2     |    0.00 ( 5.00%)   |   -13080.11   |   26514.05    |    26510.01     |
+|        Macaca_fascicularis        |   0.00   |    2     |    0.00 ( 5.00%)   |   -13080.11   |   26514.05    |    26510.01     |
+|              Node24               |   0.00   |    2     |  >1000 (100.00%)   |   -13080.11   |   26514.05    |    26510.01     |
+|          Cercocebus_atys          |   0.00   |    2     |   1.00 (100.00%)   |   -13080.46   |   26514.75    |    26510.01     |
+|               Node3               |   0.00   |    2     |    0.25 (51.00%)   |   -13081.08   |   26515.99    |    26510.01     |
+|          Pongo_pygmaeus           |   0.00   |    2     |    0.25 (51.00%)   |   -13080.11   |   26514.05    |    26510.01     |
+|           Pongo_abelii            |   0.00   |    2     |    0.25 ( 2.00%)   |   -13080.11   |   26514.05    |    26510.01     |
+
+### Rate class analyses summary
+*  9 branches with **2** rate classes
+*  62 branches with **1** rate classes
+
+### Improving parameter estimates of the adaptive rate class model
+* Log(L) = -13056.13, AIC-c = 26462.05 (174 estimated parameters)
+
+### Testing selected branches for selection
+
+|              Branch               |  Rates   |     Max. dN/dS     | Sites @ EBF>=100 |      Test LRT      |Uncorrected p-value |
+|-----------------------------------|----------|--------------------|------------------|--------------------|--------------------|
+|         Carlito_syrichta          |     2    |    0.85 (27.23%)   |       N/A        |        0.00        |       1.00000      |
+|         Tupaia_chinensis          |     1    |   0.20 (100.00%)   |       N/A        |        0.00        |       1.00000      |
+|              Node67               |     1    |   0.37 (100.00%)   |       N/A        |        0.00        |       1.00000      |
+|              Node63               |     1    |   0.19 (100.00%)   |       N/A        |        0.00        |       1.00000      |
+|        Otolemur_garnettii         |     2    |    2.13 ( 9.28%)   |         21       |        0.97        |       0.24987      |
+|        Nycticebus_coucang         |     1    |   0.27 (100.00%)   |       N/A        |        0.00        |       1.00000      |
+|          Gorilla_gorilla          |     2    |    4.86 ( 6.40%)   |         19       |        2.26        |       0.12361      |
+|              Node53               |     2    |    4.65 ( 8.36%)   |         22       |        3.93        |       0.05142      |
+|        Microcebus_murinus         |     1    |   0.10 (100.00%)   |       N/A        |        0.00        |       1.00000      |
+|        Callithrix_jacchus         |     1    |   0.44 (100.00%)   |       N/A        |        0.00        |       1.00000      |
+|              Node51               |     2    |   24.92 ( 1.33%)   |          3       |        5.20        |       0.02680      |
+|               Node9               |     1    |   0.55 (100.00%)   |       N/A        |        0.00        |       1.00000      |
+|              Node56               |     2    |   19.09 ( 5.90%)   |         20       |        6.04        |       0.01743      |
+|        Saimiri_boliviensis        |     1    |   0.29 (100.00%)   |       N/A        |        0.00        |       1.00000      |
+|              Node55               |     2    |  108.08 ( 0.19%)   |          1       |        2.56        |       0.10529      |
+|          Aotus_nancymaae          |     1    |   0.69 (100.00%)   |       N/A        |        0.00        |       1.00000      |
+|      Galeopterus_variegatus       |     1    |   0.27 (100.00%)   |       N/A        |        0.00        |       1.00000      |
+|       Propithecus_coquereli       |     1    |   0.25 (100.00%)   |       N/A        |        0.00        |       1.00000      |
+|        Colobus_angolensis         |     1    |   0.35 (100.00%)   |       N/A        |        0.00        |       1.00000      |
+|              Node43               |     1    |   0.50 (100.00%)   |       N/A        |        0.00        |       1.00000      |
+|        Cynocephalus_volans        |     1    |   0.39 (100.00%)   |       N/A        |        0.00        |       1.00000      |
+|               Node5               |     1    |   0.58 (100.00%)   |       N/A        |        0.00        |       1.00000      |
+|            Lemur_catta            |     1    |   0.31 (100.00%)   |       N/A        |        0.00        |       1.00000      |
+|              Node66               |     1    |   0.32 (100.00%)   |       N/A        |        0.00        |       1.00000      |
+|              Node57               |     1    |   0.18 (100.00%)   |       N/A        |        0.00        |       1.00000      |
+|              Node40               |     1    |   0.32 (100.00%)   |       N/A        |        0.00        |       1.00000      |
+|     Piliocolobus_tephrosceles     |     2    |   19.94 ( 1.89%)   |          7       |        4.19        |       0.04500      |
+|         Eulemur_rufifrons         |     1    |   0.27 (100.00%)   |       N/A        |        0.00        |       1.00000      |
+|              Node11               |     1    |   0.36 (100.00%)   |       N/A        |        0.00        |       1.00000      |
+|              Node46               |     1    |   0.22 (100.00%)   |       N/A        |        0.00        |       1.00000      |
+|        Chlorocebus_sabaeus        |     1    |   0.21 (100.00%)   |       N/A        |        0.00        |       1.00000      |
+|          Cebus_imitator           |     1    |   0.27 (100.00%)   |       N/A        |        0.00        |       1.00000      |
+|          Sapajus_apella           |     1    |   0.38 (100.00%)   |       N/A        |        0.00        |       1.00000      |
+|              Node38               |     1    |   0.31 (100.00%)   |       N/A        |        0.00        |       1.00000      |
+|     Symphalangus_syndactylus      |     1    |   0.19 (100.00%)   |       N/A        |        0.00        |       1.00000      |
+|              Node10               |     1    |   0.05 (100.00%)   |       N/A        |        0.00        |       1.00000      |
+|           Papio_anubis            |     1    |   0.75 (100.00%)   |       N/A        |        0.00        |       1.00000      |
+|              Node54               |     1    |   0.03 (100.00%)   |       N/A        |        0.00        |       1.00000      |
+|              Node31               |     1    |   1.25 (100.00%)   |       N/A        |        0.05        |       0.45623      |
+|         Hylobates_moloch          |     1    |   0.56 (100.00%)   |       N/A        |        0.00        |       1.00000      |
+|              Node12               |     1    |   0.26 (100.00%)   |       N/A        |        0.00        |       1.00000      |
+|              Node60               |     1    |   0.20 (100.00%)   |       N/A        |        0.00        |       1.00000      |
+|           Pan_paniscus            |     1    |   0.15 (100.00%)   |       N/A        |        0.00        |       1.00000      |
+|           Homo_sapiens            |     2    |  353.95 ( 0.98%)   |          5       |        9.03        |       0.00381      |
+|        Nomascus_leucogenys        |     1    |   0.84 (100.00%)   |       N/A        |        0.00        |       1.00000      |
+|     Trachypithecus_francoisi      |     1    |   0.73 (100.00%)   |       N/A        |        0.00        |       1.00000      |
+|         Macaca_thibetana          |     1    |   0.19 (100.00%)   |       N/A        |        0.00        |       1.00000      |
+|              Node34               |     1    |   0.19 (100.00%)   |       N/A        |        0.00        |       1.00000      |
+|       Theropithecus_gelada        |     1    |   0.09 (100.00%)   |       N/A        |        0.00        |       1.00000      |
+|         Macaca_nemestrina         |     1    |   0.25 (100.00%)   |       N/A        |        0.00        |       1.00000      |
+|        Rhinopithecus_bieti        |     1    |   1.51 (100.00%)   |       N/A        |        0.15        |       0.41941      |
+|              Node33               |     1    |   1.09 (100.00%)   |       N/A        |       -0.03        |       0.50000      |
+|      Rhinopithecus_roxellana      |     1    |   1.14 (100.00%)   |       N/A        |       -0.00        |       0.50000      |
+|              Node39               |     1    |  >1000 (100.00%)   |       N/A        |        2.49        |       0.10922      |
+|              Node13               |     1    |   0.18 (100.00%)   |       N/A        |        0.00        |       1.00000      |
+|      Mandrillus_leucophaeus       |     1    |   0.19 (100.00%)   |       N/A        |        0.00        |       1.00000      |
+|              Node25               |     1    |   0.76 (100.00%)   |       N/A        |        0.00        |       1.00000      |
+|              Node17               |     1    |   0.78 (100.00%)   |       N/A        |        0.00        |       1.00000      |
+|               Node4               |     1    |   0.00 (100.00%)   |       N/A        |        0.00        |       1.00000      |
+|              Node16               |     1    |   0.00 (100.00%)   |       N/A        |        0.00        |       1.00000      |
+|          Macaca_mulatta           |     1    |  >1000 (100.00%)   |       N/A        |        1.28        |       0.20979      |
+|              Node23               |     1    |   0.39 (100.00%)   |       N/A        |        0.00        |       1.00000      |
+|              Node48               |     1    |   0.38 (100.00%)   |       N/A        |        0.00        |       1.00000      |
+|              Node15               |     1    |   0.00 (100.00%)   |       N/A        |        0.00        |       1.00000      |
+|              Node14               |     1    |   0.00 (100.00%)   |       N/A        |        0.00        |       1.00000      |
+|        Macaca_fascicularis        |     1    |   0.00 (100.00%)   |       N/A        |        0.00        |       1.00000      |
+|              Node24               |     1    |  >1000 (100.00%)   |       N/A        |        0.61        |       0.30902      |
+|          Cercocebus_atys          |     1    |  >1000 (100.00%)   |       N/A        |        0.64        |       0.30340      |
+|               Node3               |     1    |  >1000 (100.00%)   |       N/A        |        0.45        |       0.34042      |
+|          Pongo_pygmaeus           |     1    |   1.42 (100.00%)   |       N/A        |       -0.00        |       0.50000      |
+|           Pongo_abelii            |     1    |   0.88 (100.00%)   |       N/A        |        0.00        |       1.00000      |
+----
+### Adaptive branch site random effects likelihood test 
+Likelihood ratio test for episodic diversifying positive selection at Holm-Bonferroni corrected _p =   0.0500_ found **0** branches under selection among **71** tested.
+

@@ -1,0 +1,113 @@
+
+Analysis Description
+--------------------
+aBSREL (Adaptive branch-site random effects likelihood) uses an adaptive
+random effects branch-site model framework to test whether each branch
+has evolved under positive selection, using a procedure which infers an
+optimal number of rate categories per branch. v2.2 adds support for
+multiple-hit models. v2.3 adds support for SRV. v2.5 adds support for
+ancestral state reconstruction, identification of sites contributing to
+selection signal, and some diagnostics. 
+
+- __Requirements__: in-frame codon alignment and a phylogenetic tree
+
+- __Citation__:  Less Is More: An Adaptive Branch-Site Random Effects Model for
+Efficient Detection of Episodic Diversifying Selection (2015). Mol Biol
+Evol 32 (5): 1342-1353. 
+
+- __Written by__: Sergei L Kosakovsky Pond, Ben Murrell, Steven Weaver and Temple iGEM /
+UCSD viral evolution group
+
+- __Contact Information__: spond@temple.edu
+
+- __Analysis Version__: 2.5
+
+[Advanced option] Bag of little bootstrap alignment resampling rate (permissible range = [0.01,1], default value = 1): blb: 1
+
+>code => Universal
+/media/ceglab27/Saumya/GPRC6A/HYPHY/ABSREL/Marsupialia/all_Marsupialia_renamed.aln.treefile
+all_Marsupialia_renamed.aln.treefile
+
+>Loaded a multiple sequence alignment with **11** sequences, **929** codons, and **1** partitions from `/media/ceglab27/Saumya/GPRC6A/HYPHY/ABSREL/Marsupialia/Marsupialia_relax.aln`
+
+>branches => All
+
+>multiple-hits => None
+
+>srv => No
+
+
+### * Selected 19 branches for testing: `Antechinus_flavipes, Dromiciops_gliroides, Notamacropus_eugenii, Petaurus_breviceps, Trichosurus_vulpecula, Node10, Node8, Vombatus_ursinus, Node7, Node5, Gracilinanus_agilis, Monodelphis_domestica, Node14, Node4, Macrotis_lagotis, Node3, Sminthopsis_crassicaudata, Node2, Sarcophilus_harrisii`
+
+
+### Obtaining branch lengths and nucleotide substitution biases under the nucleotide GTR model
+
+>kill-zero-lengths => Yes
+* Log(L) = -9763.34, AIC-c = 19580.73 (27 estimated parameters)
+* 1 partition. Total tree length by partition (subs/site)  0.438
+
+### Fitting the baseline model with a single dN/dS class per branch, and no site-to-site variation. 
+* Log(L) = -9459.90, AIC-c = 19024.33 (52 estimated parameters)
+* Branch-level non-synonymous/synonymous rate ratio distribution has median  0.33, and 95% of the weight in  0.09 -  1.00
+
+### Determining the optimal number of rate classes per branch using a step up procedure
+
+|              Branch               |  Length  |  Rates   |     Max. dN/dS     |    Log(L)     |     AIC-c     |Best AIC-c so far|
+|-----------------------------------|----------|----------|--------------------|---------------|---------------|-----------------|
+|         Macrotis_lagotis          |   0.05   |    2     |    0.99 (34.32%)   |   -9458.80    |   19026.19    |    19024.33     |
+|       Dromiciops_gliroides        |   0.05   |    2     |   >1000 ( 0.59%)   |   -9452.90    |   19014.39    |    19014.39     |
+|       Dromiciops_gliroides        |   0.05   |    3     |   >1000 ( 0.59%)   |   -9452.89    |   19018.41    |    19014.39     |
+|              Node14               |   0.05   |    2     |    1.38 (22.66%)   |   -9451.11    |   19014.85    |    19014.39     |
+|               Node3               |   0.04   |    2     |    1.02 (25.01%)   |   -9451.60    |   19015.83    |    19014.39     |
+|       Notamacropus_eugenii        |   0.04   |    2     |    0.35 (73.67%)   |   -9452.90    |   19018.43    |    19014.39     |
+|        Petaurus_breviceps         |   0.04   |    2     |    0.37 (73.53%)   |   -9452.90    |   19018.43    |    19014.39     |
+|       Trichosurus_vulpecula       |   0.04   |    2     |    0.34 (60.00%)   |   -9452.90    |   19018.43    |    19014.39     |
+|         Vombatus_ursinus          |   0.03   |    2     |    3.05 (13.15%)   |   -9449.76    |   19012.15    |    19012.15     |
+|         Vombatus_ursinus          |   0.03   |    3     |    3.03 (13.18%)   |   -9449.76    |   19016.20    |    19012.15     |
+|       Monodelphis_domestica       |   0.03   |    2     |    1.50 (26.97%)   |   -9449.20    |   19015.08    |    19012.15     |
+|        Gracilinanus_agilis        |   0.02   |    2     |    0.46 (57.23%)   |   -9449.76    |   19016.20    |    19012.15     |
+|     Sminthopsis_crassicaudata     |   0.02   |    2     |    3.23 (16.57%)   |   -9448.73    |   19014.13    |    19012.15     |
+|       Sarcophilus_harrisii        |   0.01   |    2     |    0.33 (57.37%)   |   -9449.76    |   19016.20    |    19012.15     |
+|        Antechinus_flavipes        |   0.01   |    2     |    0.28 ( 6.78%)   |   -9449.76    |   19016.20    |    19012.15     |
+|               Node2               |   0.01   |    2     |   33.27 ( 0.63%)   |   -9447.59    |   19011.85    |    19011.85     |
+|               Node2               |   0.01   |    3     |   34.93 ( 0.59%)   |   -9447.59    |   19015.91    |    19011.85     |
+|               Node4               |   0.00   |    2     |    0.19 (51.21%)   |   -9447.59    |   19015.90    |    19011.85     |
+|               Node7               |   0.00   |    2     |    1.46 (10.30%)   |   -9447.57    |   19015.86    |    19011.85     |
+|              Node10               |   0.00   |    2     |    0.22 (15.15%)   |   -9447.55    |   19015.82    |    19011.85     |
+|               Node8               |   0.00   |    2     |    1.94 ( 9.70%)   |   -9447.59    |   19015.89    |    19011.85     |
+|               Node5               |   0.00   |    2     |  115.88 ( 1.09%)   |   -9447.32    |   19015.36    |    19011.85     |
+
+### Rate class analyses summary
+*  16 branches with **1** rate classes
+*  3 branches with **2** rate classes
+
+### Improving parameter estimates of the adaptive rate class model
+* Log(L) = -9433.87, AIC-c = 18984.42 (58 estimated parameters)
+
+### Testing selected branches for selection
+
+|              Branch               |  Rates   |     Max. dN/dS     | Sites @ EBF>=100 |      Test LRT      |Uncorrected p-value |
+|-----------------------------------|----------|--------------------|------------------|--------------------|--------------------|
+|         Macrotis_lagotis          |     1    |   0.29 (100.00%)   |       N/A        |        0.00        |       1.00000      |
+|       Dromiciops_gliroides        |     2    |   >1000 ( 0.53%)   |          5       |        5.61        |       0.02174      |
+|              Node14               |     1    |   0.25 (100.00%)   |       N/A        |        0.00        |       1.00000      |
+|               Node3               |     1    |   0.21 (100.00%)   |       N/A        |        0.00        |       1.00000      |
+|       Notamacropus_eugenii        |     1    |   0.31 (100.00%)   |       N/A        |        0.00        |       1.00000      |
+|        Petaurus_breviceps         |     1    |   0.33 (100.00%)   |       N/A        |        0.00        |       1.00000      |
+|       Trichosurus_vulpecula       |     1    |   0.30 (100.00%)   |       N/A        |        0.00        |       1.00000      |
+|         Vombatus_ursinus          |     2    |    2.52 (14.21%)   |         29       |        1.41        |       0.19483      |
+|       Monodelphis_domestica       |     1    |   0.35 (100.00%)   |       N/A        |        0.00        |       1.00000      |
+|        Gracilinanus_agilis        |     1    |   0.42 (100.00%)   |       N/A        |        0.00        |       1.00000      |
+|     Sminthopsis_crassicaudata     |     1    |   0.44 (100.00%)   |       N/A        |        0.00        |       1.00000      |
+|       Sarcophilus_harrisii        |     1    |   0.29 (100.00%)   |       N/A        |        0.00        |       1.00000      |
+|        Antechinus_flavipes        |     1    |   0.23 (100.00%)   |       N/A        |        0.00        |       1.00000      |
+|               Node2               |     2    |   27.87 ( 0.64%)   |          3       |        2.95        |       0.08575      |
+|               Node4               |     1    |   0.08 (100.00%)   |       N/A        |        0.00        |       1.00000      |
+|               Node7               |     1    |   0.79 (100.00%)   |       N/A        |        0.00        |       1.00000      |
+|              Node10               |     1    |   0.20 (100.00%)   |       N/A        |        0.00        |       1.00000      |
+|               Node8               |     1    |   0.78 (100.00%)   |       N/A        |        0.00        |       1.00000      |
+|               Node5               |     1    |   0.92 (100.00%)   |       N/A        |        0.00        |       1.00000      |
+----
+### Adaptive branch site random effects likelihood test 
+Likelihood ratio test for episodic diversifying positive selection at Holm-Bonferroni corrected _p =   0.0500_ found **0** branches under selection among **19** tested.
+

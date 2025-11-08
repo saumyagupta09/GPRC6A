@@ -1,0 +1,85 @@
+
+Analysis Description
+--------------------
+aBSREL (Adaptive branch-site random effects likelihood) uses an adaptive
+random effects branch-site model framework to test whether each branch
+has evolved under positive selection, using a procedure which infers an
+optimal number of rate categories per branch. v2.2 adds support for
+multiple-hit models. v2.3 adds support for SRV. v2.5 adds support for
+ancestral state reconstruction, identification of sites contributing to
+selection signal, and some diagnostics. 
+
+- __Requirements__: in-frame codon alignment and a phylogenetic tree
+
+- __Citation__:  Less Is More: An Adaptive Branch-Site Random Effects Model for
+Efficient Detection of Episodic Diversifying Selection (2015). Mol Biol
+Evol 32 (5): 1342-1353. 
+
+- __Written by__: Sergei L Kosakovsky Pond, Ben Murrell, Steven Weaver and Temple iGEM /
+UCSD viral evolution group
+
+- __Contact Information__: spond@temple.edu
+
+- __Analysis Version__: 2.5
+
+[Advanced option] Bag of little bootstrap alignment resampling rate (permissible range = [0.01,1], default value = 1): blb: 1
+
+>code => Universal
+/media/ceglab27/Saumya/GPRC6A/HYPHY/ABSREL/Eulipotyphla/Eulipotyphla.aln.treefile
+Eulipotyphla.aln.treefile
+
+>Loaded a multiple sequence alignment with **4** sequences, **928** codons, and **1** partitions from `/media/ceglab27/Saumya/GPRC6A/HYPHY/ABSREL/Eulipotyphla/Eulipotyphla_relax.aln`
+
+>branches => All
+
+>multiple-hits => None
+
+>srv => No
+
+
+### * Selected 5 branches for testing: `Condylura_cristata, Erinaceus_europaeus, Sorex_araneus, Sorex_fumeus, Node3`
+
+
+### Obtaining branch lengths and nucleotide substitution biases under the nucleotide GTR model
+
+>kill-zero-lengths => Yes
+* Log(L) = -7075.09, AIC-c = 14176.21 (13 estimated parameters)
+* 1 partition. Total tree length by partition (subs/site)  0.289
+
+### Fitting the baseline model with a single dN/dS class per branch, and no site-to-site variation. 
+* Log(L) = -6816.17, AIC-c = 13680.66 (24 estimated parameters)
+* Branch-level non-synonymous/synonymous rate ratio distribution has median  0.25, and 95% of the weight in  0.20 -  0.44
+
+### Determining the optimal number of rate classes per branch using a step up procedure
+
+|              Branch               |  Length  |  Rates   |     Max. dN/dS     |    Log(L)     |     AIC-c     |Best AIC-c so far|
+|-----------------------------------|----------|----------|--------------------|---------------|---------------|-----------------|
+|        Erinaceus_europaeus        |   0.10   |    2     |    1.11 (19.43%)   |   -6812.76    |   13677.90    |    13677.90     |
+|        Erinaceus_europaeus        |   0.10   |    3     |    1.42 ( 4.80%)   |   -6812.76    |   13681.96    |    13677.90     |
+|        Condylura_cristata         |   0.09   |    2     |    0.60 (43.23%)   |   -6811.72    |   13679.88    |    13677.90     |
+|               Node3               |   0.08   |    2     |    1.05 (31.48%)   |   -6810.20    |   13676.83    |    13676.83     |
+|               Node3               |   0.08   |    3     |    1.49 ( 7.74%)   |   -6810.20    |   13680.90    |    13676.83     |
+|           Sorex_fumeus            |   0.02   |    2     |    3.43 (13.73%)   |   -6807.91    |   13676.33    |    13676.33     |
+|           Sorex_fumeus            |   0.02   |    3     |    5.08 ( 6.84%)   |   -6807.92    |   13680.42    |    13676.33     |
+|           Sorex_araneus           |   0.02   |    2     |    0.22 (15.12%)   |   -6807.90    |   13680.37    |    13676.33     |
+
+### Rate class analyses summary
+*  3 branches with **2** rate classes
+*  2 branches with **1** rate classes
+
+### Improving parameter estimates of the adaptive rate class model
+* Log(L) = -6794.53, AIC-c = 13649.56 (30 estimated parameters)
+
+### Testing selected branches for selection
+
+|              Branch               |  Rates   |     Max. dN/dS     | Sites @ EBF>=100 |      Test LRT      |Uncorrected p-value |
+|-----------------------------------|----------|--------------------|------------------|--------------------|--------------------|
+|        Erinaceus_europaeus        |     2    |    1.01 (16.86%)   |          4       |       -0.00        |       0.50000      |
+|        Condylura_cristata         |     1    |   0.22 (100.00%)   |       N/A        |        0.00        |       1.00000      |
+|               Node3               |     2    |    0.93 (28.85%)   |       N/A        |        0.00        |       1.00000      |
+|           Sorex_fumeus            |     2    |    3.07 (13.10%)   |         13       |        1.46        |       0.19024      |
+|           Sorex_araneus           |     1    |   0.18 (100.00%)   |       N/A        |        0.00        |       1.00000      |
+----
+### Adaptive branch site random effects likelihood test 
+Likelihood ratio test for episodic diversifying positive selection at Holm-Bonferroni corrected _p =   0.0500_ found **0** branches under selection among **5** tested.
+
