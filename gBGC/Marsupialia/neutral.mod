@@ -1,0 +1,11 @@
+ALPHABET: A C G T 
+ORDER: 0
+SUBST_MOD: REV
+TRAINING_LNL: -9777.143506
+BACKGROUND: 0.292307 0.222156 0.196899 0.288638 
+RATE_MAT:
+  -0.891913    0.136553    0.672894    0.082466 
+   0.179673   -1.137955    0.105039    0.853243 
+   0.998947    0.118513   -1.251535    0.134076 
+   0.083514    0.656716    0.091462   -0.831693 
+TREE: ((Antechinus_flavipes:0.0110843,((((Dromiciops_gliroides:0.0502915,((Notamacropus_eugenii:0.0384852,(Petaurus_breviceps:0.0378529,Trichosurus_vulpecula:0.0338377)69:0.00335965)91:0.00242139,Vombatus_ursinus:0.026884)94:0.00335924)49:0.00188915,(Gracilinanus_agilis:0.0192261,Monodelphis_domestica:0.0249079)100:0.0494993)50:0.00424284,Macrotis_lagotis:0.05168)100:0.0417033,Sminthopsis_crassicaudata:0.0183264)94:0.00624072):0.00647103,Sarcophilus_harrisii:0.00647103);

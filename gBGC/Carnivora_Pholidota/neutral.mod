@@ -1,0 +1,11 @@
+ALPHABET: A C G T 
+ORDER: 0
+SUBST_MOD: REV
+TRAINING_LNL: -11708.115220
+BACKGROUND: 0.280789 0.231670 0.205215 0.282326 
+RATE_MAT:
+  -0.876812    0.146635    0.642558    0.087619 
+   0.177725   -1.173981    0.116027    0.880229 
+   0.879194    0.130985   -1.122246    0.112068 
+   0.087142    0.722295    0.081459   -0.890895 
+TREE: ((Acinonyx_jubatus:0.00242174,(Puma_concolor:0.000763484,Puma_yagouaroundi:0.00151644):0.000763776):0.00070158,(((Felis_catus:0.00286955,(Prionailurus_bengalensis:0.00196787,Prionailurus_viverrinus:0.00149363):0.00135761):0.00086848,(Lynx_canadensis:0.00132503,Lynx_rufus:0.00255098):0.00225308):0.00124176,(Leopardus_geoffroyi:0.00511398,((Neofelis_nebulosa:0.00311356,((((Panthera_leo:0.00140958,Panthera_onca:0.00176422):0.000909696,Panthera_pardus:0.00258301):0.00108705,Panthera_uncia:0.00191887):0.00147174,Panthera_tigris:0.000988748):0.00215366):0.00113244,((Hyaena_hyaena:0.0258455,Suricata_suricatta:0.0269304):0.00681939,((((Ailuropoda_melanoleuca:0.00645534,((Ursus_americanus:0.00231956,Ursus_arctos:0.00147515):0.000871156,Ursus_maritimus:0.00081987):0.00767333):0.0196853,((((Callorhinus_ursinus:0.00375453,(Eumetopias_jubatus:0.00109452,Zalophus_californianus:0.00072173):0.00221356):0.00305508,Odobenus_rosmarus:0.0045645):0.00502149,((Halichoerus_grypus:0.000730646,Phoca_vitulina:0.0027502):0.00110137,((Leptonychotes_weddellii:0.00322201,(Mirounga_angustirostris:0.000804319,Mirounga_leonina:0.00062623):0.002681):0.000909881,Neomonachus_schauinslandi:0.00225221):0.00399501):0.00564222):0.0116846,((((Enhydra_lutris:0.00755007,Lutra_lutra:0.00573869):0.00369878,Lontra_canadensis:0.00583258):0.00348414,((Mustela_erminea:0.0044116,(Mustela_lutreola:0.00183055,(Mustela_nigripes:0.00263992,Mustela_putorius:0.00287783):0.00129303):0.00221363):0.000776869,Neogale_vison:0.00469116):0.00651074):0.00317916,Meles_meles:0.0111725):0.0236527):0.00304607):0.00854553,((Canis_lupus:0.00242146,(Vulpes_lagopus:0.00148777,Vulpes_vulpes:0.00253918):0.00361032):0.00152108,Nyctereutes_procyonoides:0.00146234):0.0262649):0.00946423,(Manis_javanica:0.00706972,Manis_pentadactyla:0.00935149):0.0692148):0.0148737):0.0174186):0.00340926):0.00146749):0.00070158);
