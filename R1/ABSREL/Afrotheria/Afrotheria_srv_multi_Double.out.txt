@@ -1,0 +1,118 @@
+
+Analysis Description
+--------------------
+aBSREL (Adaptive branch-site random effects likelihood) uses an adaptive
+random effects branch-site model framework to test whether each branch
+has evolved under positive selection, using a procedure which infers an
+optimal number of rate categories per branch. v2.2 adds support for
+multiple-hit models. v2.3 adds support for SRV. v2.5 adds support for
+ancestral state reconstruction, identification of sites contributing to
+selection signal, and some diagnostics. 
+
+- __Requirements__: in-frame codon alignment and a phylogenetic tree
+
+- __Citation__:  Less Is More: An Adaptive Branch-Site Random Effects Model for
+Efficient Detection of Episodic Diversifying Selection (2015). Mol Biol
+Evol 32 (5): 1342-1353. 
+
+- __Written by__: Sergei L Kosakovsky Pond, Ben Murrell, Steven Weaver and Temple iGEM /
+UCSD viral evolution group
+
+- __Contact Information__: spond@temple.edu
+
+- __Analysis Version__: 2.5
+
+[Advanced option] Bag of little bootstrap alignment resampling rate (permissible range = [0.01,1], default value = 1): blb: 1
+
+>code => Universal
+/home/morpheus/GPRC6A_hyphy/ABSREL/Afrotheria/Afrotheria_Xenarthra.nwk
+Afrotheria_Xenarthra.nwk
+
+>Loaded a multiple sequence alignment with **8** sequences, **929** codons, and **1** partitions from `/home/morpheus/GPRC6A_hyphy/ABSREL/Afrotheria/codon_alignment.phy`
+
+>branches => All
+
+>multiple-hits => Double
+
+>srv => Yes
+The number omega rate classes to include in the model (permissible range = [1,10], default value = 3, integer): 
+>syn-rates => 3
+
+
+### * Selected 13 branches for testing: `Loxodonta_africana, Elephas_maximus, Node2, Chrysochloris_asiatica, Echinops_telfairi, Node7, Elephantulus_edwardii, Node6, Orycteropus_afer, Node5, Dasypus_novemcinctus, Choloepus_didactylus, Node12`
+
+
+### Obtaining branch lengths and nucleotide substitution biases under the nucleotide GTR model
+
+>kill-zero-lengths => Yes
+* Log(L) = -9630.11, AIC-c = 19302.27 (21 estimated parameters)
+* 1 partition. Total tree length by partition (subs/site)  0.465
+
+### Fitting the baseline model with a single dN/dS class per branch, and no site-to-site variation. 
+* Log(L) = -9188.87, AIC-c = 18494.68 (58 estimated parameters)
+* The following rate distribution for site-to-site **synonymous** rate variation was inferred
+
+|               Rate                | Proportion, % |               Notes               |
+|-----------------------------------|---------------|-----------------------------------|
+|               0.600               |    46.055     |                                   |
+|               0.916               |    45.381     |                                   |
+|               3.597               |     8.563     |                                   |
+
+* Branch-level non-synonymous/synonymous rate ratio distribution has median  0.32, and 95% of the weight in  0.17 -  2.61
+* Branch-level rate at which 2 nucleotides are changed instantly within a single codon distribution has median  0.09, and 95% of the weight in  0.00 -  0.16
+
+### Determining the optimal number of rate classes per branch using a step up procedure
+
+|              Branch               |  Length  |  Rates   |     Max. dN/dS     |  2x rate   |    Log(L)     |     AIC-c     |Best AIC-c so far|
+|-----------------------------------|----------|----------|--------------------|------------|---------------|---------------|-----------------|
+|         Echinops_telfairi         |   0.10   |    2     |   0.13 (100.00%)   |    0.06    |   -9188.87    |   18498.74    |    18494.68     |
+|       Elephantulus_edwardii       |   0.10   |    2     |    0.17 (66.56%)   |    0.08    |   -9188.81    |   18498.61    |    18494.68     |
+|      Chrysochloris_asiatica       |   0.07   |    2     |    0.35 (27.04%)   |    0.00    |   -9186.47    |   18493.93    |    18493.93     |
+|      Chrysochloris_asiatica       |   0.07   |    3     |    0.35 (27.04%)   |    0.00    |   -9186.47    |   18498.00    |    18493.93     |
+|         Orycteropus_afer          |   0.06   |    2     |   0.08 (100.00%)   |    0.13    |   -9186.47    |   18498.00    |    18493.93     |
+|       Choloepus_didactylus        |   0.05   |    2     |   0.08 (100.00%)   |    0.00    |   -9186.47    |   18498.00    |    18493.93     |
+|              Node12               |   0.04   |    2     |    0.09 (86.28%)   |    0.01    |   -9186.46    |   18497.99    |    18493.93     |
+|       Dasypus_novemcinctus        |   0.04   |    2     |    0.08 (88.09%)   |    0.07    |   -9186.47    |   18498.00    |    18493.93     |
+|               Node2               |   0.04   |    2     |    0.13 (42.13%)   |    0.11    |   -9186.44    |   18497.94    |    18493.93     |
+|               Node7               |   0.01   |    2     |    0.02 (78.73%)   |    0.16    |   -9186.47    |   18498.00    |    18493.93     |
+|               Node5               |   0.01   |    2     |   0.02 (100.00%)   |    0.00    |   -9186.47    |   18498.00    |    18493.93     |
+|        Loxodonta_africana         |   0.00   |    2     |    0.25 ( 1.38%)   |    0.01    |   -9186.42    |   18497.90    |    18493.93     |
+|               Node6               |   0.00   |    2     |    0.39 ( 1.43%)   |    0.01    |   -9186.43    |   18497.92    |    18493.93     |
+|          Elephas_maximus          |   0.00   |    2     |    0.25 ( 1.37%)   |    0.01    |   -9186.51    |   18498.09    |    18493.93     |
+
+### Rate class analyses summary
+*  12 branches with **1** rate classes
+*  1 branches with **2** rate classes
+
+### Improving parameter estimates of the adaptive rate class model
+* Log(L) = -9165.97, AIC-c = 18452.93 (60 estimated parameters)
+* The following rate distribution for site-to-site **synonymous** rate variation was inferred
+
+|               Rate                | Proportion, % |               Notes               |
+|-----------------------------------|---------------|-----------------------------------|
+|               0.632               |    47.326     |                                   |
+|               0.900               |    43.342     |                                   |
+|               3.334               |     9.332     |                                   |
+
+
+### Testing selected branches for selection
+
+|              Branch               |  Rates   |     Max. dN/dS     | Sites @ EBF>=100 |  2x rate   |      Test LRT      |Uncorrected p-value |
+|-----------------------------------|----------|--------------------|------------------|------------|--------------------|--------------------|
+|         Echinops_telfairi         |     1    |   0.18 (100.00%)   |       N/A        |    0.06    |        0.00        |       1.00000      |
+|       Elephantulus_edwardii       |     1    |   0.15 (100.00%)   |       N/A        |    0.17    |        0.00        |       1.00000      |
+|      Chrysochloris_asiatica       |     2    |    0.36 (25.30%)   |       N/A        |    0.00    |        0.00        |       1.00000      |
+|         Orycteropus_afer          |     1    |   0.22 (100.00%)   |       N/A        |    0.14    |        0.00        |       1.00000      |
+|       Choloepus_didactylus        |     1    |   0.28 (100.00%)   |       N/A        |    0.00    |        0.00        |       1.00000      |
+|              Node12               |     1    |   0.28 (100.00%)   |       N/A        |    0.05    |        0.00        |       1.00000      |
+|       Dasypus_novemcinctus        |     1    |   0.29 (100.00%)   |       N/A        |    0.10    |        0.00        |       1.00000      |
+|               Node2               |     1    |   0.22 (100.00%)   |       N/A        |    0.15    |        0.00        |       1.00000      |
+|               Node7               |     1    |   0.34 (100.00%)   |       N/A        |    0.18    |        0.00        |       1.00000      |
+|               Node5               |     1    |   1.48 (100.00%)   |       N/A        |    0.00    |       -0.09        |       0.50000      |
+|        Loxodonta_africana         |     1    |   0.21 (100.00%)   |       N/A        |    0.00    |        0.00        |       1.00000      |
+|               Node6               |     1    |  >1000 (100.00%)   |       N/A        |    0.00    |        0.49        |       0.33193      |
+|          Elephas_maximus          |     1    |   1.39 (100.00%)   |       N/A        |    0.00    |       -0.75        |       0.50000      |
+----
+### Adaptive branch site random effects likelihood test 
+Likelihood ratio test for episodic diversifying positive selection at Holm-Bonferroni corrected _p =   0.0500_ found **0** branches under selection among **13** tested.
+

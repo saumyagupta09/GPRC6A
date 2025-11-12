@@ -1,0 +1,108 @@
+
+Analysis Description
+--------------------
+aBSREL (Adaptive branch-site random effects likelihood) uses an adaptive
+random effects branch-site model framework to test whether each branch
+has evolved under positive selection, using a procedure which infers an
+optimal number of rate categories per branch. v2.2 adds support for
+multiple-hit models. v2.3 adds support for SRV. v2.5 adds support for
+ancestral state reconstruction, identification of sites contributing to
+selection signal, and some diagnostics. 
+
+- __Requirements__: in-frame codon alignment and a phylogenetic tree
+
+- __Citation__:  Less Is More: An Adaptive Branch-Site Random Effects Model for
+Efficient Detection of Episodic Diversifying Selection (2015). Mol Biol
+Evol 32 (5): 1342-1353. 
+
+- __Written by__: Sergei L Kosakovsky Pond, Ben Murrell, Steven Weaver and Temple iGEM /
+UCSD viral evolution group
+
+- __Contact Information__: spond@temple.edu
+
+- __Analysis Version__: 2.5
+
+[Advanced option] Bag of little bootstrap alignment resampling rate (permissible range = [0.01,1], default value = 1): blb: 1
+
+>code => Universal
+/home/morpheus/GPRC6A_hyphy/ABSREL/Artiodactyla/Artiodactyla.nwk
+Artiodactyla.nwk
+
+>Loaded a multiple sequence alignment with **6** sequences, **928** codons, and **1** partitions from `/home/morpheus/GPRC6A_hyphy/ABSREL/Artiodactyla/codon_alignment.phy`
+
+>branches => All
+
+>multiple-hits => Double
+
+>srv => Yes
+The number omega rate classes to include in the model (permissible range = [1,10], default value = 3, integer): 
+>syn-rates => 3
+
+
+### * Selected 9 branches for testing: `Vicugna_pacos, Camelus_dromedarius, Camelus_bactrianus, Node3, Hippopotamus_amphibius, Phacochoerus_africanus, Sus_scrofa, Node8, Node6`
+
+
+### Obtaining branch lengths and nucleotide substitution biases under the nucleotide GTR model
+
+>kill-zero-lengths => Yes
+* Log(L) = -5917.49, AIC-c = 11869.03 (17 estimated parameters)
+* 1 partition. Total tree length by partition (subs/site)  0.151
+
+### Fitting the baseline model with a single dN/dS class per branch, and no site-to-site variation. 
+* Log(L) = -5708.01, AIC-c = 11508.81 (46 estimated parameters)
+* The following rate distribution for site-to-site **synonymous** rate variation was inferred
+
+|               Rate                | Proportion, % |               Notes               |
+|-----------------------------------|---------------|-----------------------------------|
+|               0.459               |    28.589     |                                   |
+|               0.591               |    40.463     |                                   |
+|               2.034               |    30.947     |                                   |
+
+* Branch-level non-synonymous/synonymous rate ratio distribution has median  0.22, and 95% of the weight in  0.11 -  1.13
+* Branch-level rate at which 2 nucleotides are changed instantly within a single codon distribution has median  0.15, and 95% of the weight in  0.00 -  0.00
+
+### Determining the optimal number of rate classes per branch using a step up procedure
+
+|              Branch               |  Length  |  Rates   |     Max. dN/dS     |  2x rate   |    Log(L)     |     AIC-c     |Best AIC-c so far|
+|-----------------------------------|----------|----------|--------------------|------------|---------------|---------------|-----------------|
+|               Node6               |   0.06   |    2     |    0.09 (91.44%)   |    0.14    |   -5708.01    |   11512.88    |    11508.81     |
+|               Node8               |   0.04   |    2     |    0.16 (41.69%)   |    0.00    |   -5707.75    |   11512.35    |    11508.81     |
+|      Hippopotamus_amphibius       |   0.04   |    2     |   0.05 (100.00%)   |    0.00    |   -5708.01    |   11512.88    |    11508.81     |
+|               Node3               |   0.01   |    2     |    0.01 ( 9.91%)   |    0.01    |   -5708.04    |   11512.93    |    11508.81     |
+|           Vicugna_pacos           |   0.00   |    2     |    0.01 (67.40%)   |    0.00    |   -5708.02    |   11512.89    |    11508.81     |
+|            Sus_scrofa             |   0.00   |    2     |    0.31 ( 5.21%)   |    0.01    |   -5707.33    |   11511.51    |    11508.81     |
+|      Phacochoerus_africanus       |   0.00   |    2     |    0.03 (12.12%)   |    0.02    |   -5708.06    |   11512.97    |    11508.81     |
+|        Camelus_bactrianus         |   0.00   |    2     |    0.25 ( 0.69%)   |    0.01    |   -5708.10    |   11513.04    |    11508.81     |
+|        Camelus_dromedarius        |   0.00   |    2     |    0.00 (51.00%)   |    1.00    |   -5708.01    |   11512.88    |    11508.81     |
+
+### Rate class analyses summary
+*  9 branches with **1** rate classes
+
+### Improving parameter estimates of the adaptive rate class model
+* Log(L) = -5700.24, AIC-c = 11493.26 (46 estimated parameters)
+* The following rate distribution for site-to-site **synonymous** rate variation was inferred
+
+|               Rate                | Proportion, % |               Notes               |
+|-----------------------------------|---------------|-----------------------------------|
+|               0.561               |    49.957     |                                   |
+|               0.567               |    18.759     |       Collapsed rate class        |
+|               1.961               |    31.284     |                                   |
+
+
+### Testing selected branches for selection
+
+|              Branch               |  Rates   |     Max. dN/dS     | Sites @ EBF>=100 |  2x rate   |      Test LRT      |Uncorrected p-value |
+|-----------------------------------|----------|--------------------|------------------|------------|--------------------|--------------------|
+|               Node6               |     1    |   0.22 (100.00%)   |       N/A        |    0.18    |        0.00        |       1.00000      |
+|               Node8               |     1    |   0.19 (100.00%)   |       N/A        |    0.08    |        0.00        |       1.00000      |
+|      Hippopotamus_amphibius       |     1    |   0.16 (100.00%)   |       N/A        |    0.00    |        0.00        |       1.00000      |
+|               Node3               |     1    |   0.14 (100.00%)   |       N/A        |    0.00    |        0.00        |       1.00000      |
+|           Vicugna_pacos           |     1    |   0.12 (100.00%)   |       N/A        |    0.00    |        0.00        |       1.00000      |
+|            Sus_scrofa             |     1    |   0.99 (100.00%)   |       N/A        |    0.25    |        0.00        |       1.00000      |
+|      Phacochoerus_africanus       |     1    |   0.22 (100.00%)   |       N/A        |    0.00    |        0.00        |       1.00000      |
+|        Camelus_bactrianus         |     1    |   0.09 (100.00%)   |       N/A        |    0.00    |        0.00        |       1.00000      |
+|        Camelus_dromedarius        |     1    |   1.00 (100.00%)   |       N/A        |    0.00    |        0.00        |       1.00000      |
+----
+### Adaptive branch site random effects likelihood test 
+Likelihood ratio test for episodic diversifying positive selection at Holm-Bonferroni corrected _p =   0.0500_ found **0** branches under selection among **9** tested.
+

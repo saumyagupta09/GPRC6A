@@ -1,0 +1,89 @@
+multiple-files: No
+
+Analysis Description
+--------------------
+RELAX (a random effects test of selection relaxation) uses a random
+effects branch-site model framework to test whether a set of 'Test'
+for convergence diagnostics. Version 4.5 adds support for multiple
+datasets for joint testing.
+branches evolves under relaxed selection relative to a set of
+'Reference' branches (R), as measured by the relaxation parameter (K).
+Version 2.1 adds a check for stability in K estimates to try to mitigate
+convergence problems. Version 3 provides support for >2 branch sets.
+Version 3.1 adds LHC + Nedler-Mead initial fit phase and keyword
+support. Version 3.1.1 adds some bug fixes for better convergence.
+Version 4.0 adds support for synonymous rate variation. Version 4.1 adds
+further support for multiple hit models. Version 4.1.1 adds reporting
+
+- __Requirements__: in-frame codon alignment and a phylogenetic tree, with at least two
+groups of branches defined using the {} notation (one group can be
+defined as all unlabeled branches)
+
+- __Citation__: RELAX: Detecting Relaxed Selection in a Phylogenetic Framework (2015).
+Mol Biol Evol 32 (3): 820-832
+
+- __Written by__: Sergei L Kosakovsky Pond, Ben Murrell, Steven Weaver and Temple iGEM /
+UCSD viral evolution g
+
+- __Contact Information__: spond@temple.edu
+
+- __Analysis Version__: 4.5
+
+
+>code => Universal
+/home/morpheus/GPRC6A_hyphy/Rodentia_Lagomorpha/splits_Grammomys_surdaster/group_2.tree.nwk
+splits_Grammomys_surdaster/group_2.tree.nwk
+
+>Loaded a multiple sequence alignment with **8** sequences, **929** codons, and **1** partitions from `/home/morpheus/GPRC6A_hyphy/Rodentia_Lagomorpha/splits_Grammomys_surdaster/group_2.phy`
+
+>test => fg
+The number of points in the initial distributional guess for likelihood fitting (permissible range = [1,10000], default value = 250, integer): 
+>grid-size => 250
+The number of initial random guesses to 'seed' rate values optimization (permissible range = [1,25], default value = 1, integer): 
+>starting-points => 1
+
+
+### Branch sets for RELAX analysis
+
+>multiple-hits => None
+
+* Selected 12 branches as the _Reference_ set: `Apodemus_sylvaticus, Arvicanthis_niloticus, Mastomys_coucha, Mus_caroli, Mus_musculus, Mus_pahari, Node49, Node50, Node51, Node52, Node58, Rattus_norvegicus`
+
+* Selected 1 branches as the _Test_ set: `Grammomys_surdaster`
+The number omega rate classes to include in the model (permissible range = [2,10], default value = 3, integer): 
+>rates => 3
+
+>models => All
+
+>srv => Yes
+The number omega rate classes to include in the model (permissible range = [1,10], default value = 3, integer): 
+>syn-rates => 3
+
+
+### Obtaining branch lengths and nucleotide substitution biases under the nucleotide GTR model
+
+>kill-zero-lengths => Yes
+* Log(L) = -7506.58, AIC-c = 15055.19 (21 estimated parameters)
+* 1 partition. Total tree length by partition (subs/site)  0.253
+
+### Obtaining the global omega estimate based on relative GTR branch lengths and nucleotide substitution biases
+* Log(L) = -7204.36, AIC-c = 14466.95 (29 estimated parameters)
+* 1 partition. Total tree length by partition (subs/site)  0.262
+* non-synonymous/synonymous rate ratio for *Reference* =   0.2300
+* non-synonymous/synonymous rate ratio for *Test* =   0.1970
+
+### Improving branch lengths, nucleotide substitution biases, and global dN/dS ratios under a full codon model
+* Log(L) = -7187.05, AIC-c = 14432.34 (29 estimated parameters)
+* 1 partition. Total tree length by partition (subs/site)  0.261
+* non-synonymous/synonymous rate ratio for *Reference* =   0.2014
+* non-synonymous/synonymous rate ratio for *Test* =   0.1611
+
+### Fitting the general descriptive (separate k per branch) model
+Error:
+wpHL_NDx.tree_id_0.Node50.k evaluated to a NaN; this can cause all kinds of odd behavior downstream, therefore it is safer to quit now
+
+Function call stack
+1 :  [namespace = PSPWItzw] Optimize(mles, ^lf_id);
+-------
+2 :  relax.general_descriptive.fit=estimators.FitExistingLF(relax.general_descriptive.fit[terms.likelihood_function],relax.model_object_map);
+-------

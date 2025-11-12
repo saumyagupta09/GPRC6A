@@ -1,0 +1,169 @@
+
+Analysis Description
+--------------------
+aBSREL (Adaptive branch-site random effects likelihood) uses an adaptive
+random effects branch-site model framework to test whether each branch
+has evolved under positive selection, using a procedure which infers an
+optimal number of rate categories per branch. v2.2 adds support for
+multiple-hit models. v2.3 adds support for SRV. v2.5 adds support for
+ancestral state reconstruction, identification of sites contributing to
+selection signal, and some diagnostics. 
+
+- __Requirements__: in-frame codon alignment and a phylogenetic tree
+
+- __Citation__:  Less Is More: An Adaptive Branch-Site Random Effects Model for
+Efficient Detection of Episodic Diversifying Selection (2015). Mol Biol
+Evol 32 (5): 1342-1353. 
+
+- __Written by__: Sergei L Kosakovsky Pond, Ben Murrell, Steven Weaver and Temple iGEM /
+UCSD viral evolution group
+
+- __Contact Information__: spond@temple.edu
+
+- __Analysis Version__: 2.5
+
+[Advanced option] Bag of little bootstrap alignment resampling rate (permissible range = [0.01,1], default value = 1): blb: 1
+
+>code => Universal
+/home/morpheus/GPRC6A_hyphy/ABSREL/Chiroptera/Chiroptera.nwk
+Chiroptera.nwk
+
+>Loaded a multiple sequence alignment with **21** sequences, **928** codons, and **1** partitions from `/home/morpheus/GPRC6A_hyphy/ABSREL/Chiroptera/codon_alignment.phy`
+
+>branches => All
+
+>multiple-hits => Double+Triple
+
+>srv => Yes
+The number omega rate classes to include in the model (permissible range = [1,10], default value = 3, integer): 
+>syn-rates => 3
+
+
+### * Selected 39 branches for testing: `Pteropus_alecto, Pteropus_vampyrus, Node2, Rousettus_aegyptiacus, Saccopteryx_leptura, Saccopteryx_bilineata, Node7, Pteronotus_mesoamericanus, Sturnira_hondurensis, Artibeus_jamaicensis, Node15, Phyllostomus_hastatus, Phyllostomus_discolor, Node18, Node14, Desmodus_rotundus, Node13, Node11, Molossus_molossus, Myotis_brandtii, Myotis_yumanensis, Node28, Myotis_lucifugus, Node27, Myotis_davidii, Myotis_daubentonii, Myotis_myotis, Node34, Node32, Node26, Pipistrellus_kuhlii, Eptesicus_fuscus, Node37, Node25, Miniopterus_natalensis, Node24, Node22, Node10, Node6`
+
+
+### Obtaining branch lengths and nucleotide substitution biases under the nucleotide GTR model
+
+>kill-zero-lengths => Yes
+* Log(L) = -13023.97, AIC-c = 26142.03 (47 estimated parameters)
+* 1 partition. Total tree length by partition (subs/site)  0.614
+
+### Fitting the baseline model with a single dN/dS class per branch, and no site-to-site variation. 
+* Log(L) = -12454.84, AIC-c = 25262.88 (175 estimated parameters)
+* The following rate distribution for site-to-site **synonymous** rate variation was inferred
+
+|               Rate                | Proportion, % |               Notes               |
+|-----------------------------------|---------------|-----------------------------------|
+|               0.238               |    28.610     |                                   |
+|               1.091               |    64.392     |                                   |
+|               3.281               |     6.998     |                                   |
+
+* Branch-level non-synonymous/synonymous rate ratio distribution has median  0.29, and 95% of the weight in  0.00 - 10000000000.00
+* Branch-level rate at which 2 nucleotides are changed instantly within a single codon distribution has median  0.07, and 95% of the weight in  0.00 -  0.00
+* Branch-level rate at which 3 nucleotides are changed instantly within a single codon distribution has median  0.69, and 95% of the weight in  0.00 -  0.00
+
+### Determining the optimal number of rate classes per branch using a step up procedure
+
+|              Branch               |  Length  |  Rates   |     Max. dN/dS     |  2x rate   |  3x rate   |    Log(L)     |     AIC-c     |Best AIC-c so far|
+|-----------------------------------|----------|----------|--------------------|------------|------------|---------------|---------------|-----------------|
+|        Pipistrellus_kuhlii        |   0.05   |    2     |    0.21 (47.87%)   |    0.00    |    0.00    |   -12454.25   |   25265.76    |    25262.88     |
+|               Node7               |   0.05   |    2     |   0.10 (100.00%)   |    0.15    |    0.00    |   -12454.84   |   25266.95    |    25262.88     |
+|         Molossus_molossus         |   0.05   |    2     |    0.06 (99.99%)   |    0.00    |    0.00    |   -12454.88   |   25267.02    |    25262.88     |
+|               Node6               |   0.05   |    2     |   0.07 (100.00%)   |    0.00    |    0.00    |   -12454.84   |   25266.95    |    25262.88     |
+|      Miniopterus_natalensis       |   0.04   |    2     |    0.11 (67.35%)   |    0.00    |    0.38    |   -12454.78   |   25266.83    |    25262.88     |
+|         Desmodus_rotundus         |   0.04   |    2     |    0.13 (54.16%)   |    0.00    |    0.00    |   -12454.57   |   25266.41    |    25262.88     |
+|     Pteronotus_mesoamericanus     |   0.03   |    2     |    0.23 (32.52%)   |    0.00    |    0.00    |   -12453.82   |   25264.91    |    25262.88     |
+|              Node25               |   0.03   |    2     |    0.12 (35.31%)   |    0.00    |    0.62    |   -12454.80   |   25266.87    |    25262.88     |
+|       Artibeus_jamaicensis        |   0.03   |    2     |    0.13 (38.48%)   |    0.00    |    0.00    |   -12454.49   |   25266.24    |    25262.88     |
+|              Node37               |   0.02   |    2     |   0.03 (100.00%)   |    0.00    |    0.00    |   -12454.84   |   25266.95    |    25262.88     |
+|       Sturnira_hondurensis        |   0.02   |    2     |    0.03 (88.69%)   |    0.00    |    0.00    |   -12454.84   |   25266.95    |    25262.88     |
+|              Node18               |   0.02   |    2     |   0.05 (100.00%)   |    0.00    |    0.00    |   -12454.84   |   25266.95    |    25262.88     |
+|              Node11               |   0.02   |    2     |    0.17 (29.80%)   |    0.00    |    0.00    |   -12454.50   |   25266.25    |    25262.88     |
+|         Eptesicus_fuscus          |   0.02   |    2     |    0.04 ( 0.00%)   |    0.00    |    0.00    |   -12454.84   |   25266.95    |    25262.88     |
+|       Rousettus_aegyptiacus       |   0.02   |    2     |    0.38 (11.38%)   |    0.00    |    0.00    |   -12453.23   |   25263.72    |    25262.88     |
+|          Myotis_davidii           |   0.02   |    2     |    0.10 (33.76%)   |    0.00    |    0.00    |   -12454.41   |   25266.08    |    25262.88     |
+|               Node2               |   0.02   |    2     |   0.03 (100.00%)   |    0.00    |    0.00    |   -12454.84   |   25266.95    |    25262.88     |
+|              Node13               |   0.02   |    2     |   0.03 (100.00%)   |    0.09    |    0.00    |   -12454.84   |   25266.95    |    25262.88     |
+|              Node15               |   0.01   |    2     |    0.03 (98.89%)   |    0.00    |    0.01    |   -12454.86   |   25266.98    |    25262.88     |
+|              Node26               |   0.01   |    2     |    0.05 ( 0.00%)   |    0.00    |    0.02    |   -12454.85   |   25266.97    |    25262.88     |
+|          Myotis_brandtii          |   0.01   |    2     |    0.02 (74.34%)   |    0.00    |    0.01    |   -12454.85   |   25266.97    |    25262.88     |
+|         Myotis_yumanensis         |   0.01   |    2     |    0.01 (73.66%)   |    0.00    |    0.04    |   -12454.86   |   25266.99    |    25262.88     |
+|        Myotis_daubentonii         |   0.01   |    2     |    0.01 (77.91%)   |    0.00    |    0.04    |   -12454.86   |   25266.99    |    25262.88     |
+|       Saccopteryx_bilineata       |   0.01   |    2     |    0.01 (36.31%)   |    0.00    |    0.00    |   -12454.86   |   25266.99    |    25262.88     |
+|       Phyllostomus_discolor       |   0.01   |    2     |    0.02 (51.17%)   |    0.00    |    0.00    |   -12454.85   |   25266.96    |    25262.88     |
+|        Saccopteryx_leptura        |   0.01   |    2     |   0.01 (100.00%)   |    0.00    |    0.00    |   -12454.84   |   25266.95    |    25262.88     |
+|         Myotis_lucifugus          |   0.01   |    2     |    0.01 (80.43%)   |    0.01    |    0.00    |   -12454.86   |   25266.99    |    25262.88     |
+|              Node24               |   0.01   |    2     |    0.03 ( 0.00%)   |    0.10    |    0.00    |   -12454.84   |   25266.95    |    25262.88     |
+|              Node14               |   0.00   |    2     |    0.04 (19.25%)   |    0.01    |    0.20    |   -12454.95   |   25267.16    |    25262.88     |
+|           Myotis_myotis           |   0.00   |    2     |    0.02 ( 0.00%)   |    0.00    |    0.01    |   -12454.85   |   25266.96    |    25262.88     |
+|              Node32               |   0.00   |    2     |   0.00 (100.00%)   |    0.01    |    0.04    |   -12454.87   |   25267.00    |    25262.88     |
+|              Node22               |   0.00   |    2     |    0.24 ( 3.81%)   |    0.00    |    0.00    |   -12454.78   |   25266.82    |    25262.88     |
+|          Pteropus_alecto          |   0.00   |    2     |    0.02 (42.14%)   |    0.01    |    0.22    |   -12454.92   |   25267.11    |    25262.88     |
+|       Phyllostomus_hastatus       |   0.00   |    2     |    0.01 ( 0.99%)   |    0.75    |    0.00    |   -12454.84   |   25266.95    |    25262.88     |
+|         Pteropus_vampyrus         |   0.00   |    2     |    0.02 ( 2.15%)   |    0.01    |    0.20    |   -12454.89   |   25267.04    |    25262.88     |
+|              Node27               |   0.00   |    2     |    0.00 (86.84%)   |    0.01    |    0.06    |   -12454.86   |   25266.99    |    25262.88     |
+|              Node10               |   0.00   |    2     |    0.01 (99.91%)   |    0.01    |    0.02    |   -12454.86   |   25266.99    |    25262.88     |
+|              Node34               |   0.00   |    2     |    0.01 (40.31%)   |    0.02    |    0.00    |   -12454.89   |   25267.05    |    25262.88     |
+|              Node28               |   0.00   |    2     |    0.00 (50.00%)   |    0.01    |    0.10    |   -12454.84   |   25266.95    |    25262.88     |
+
+### Rate class analyses summary
+*  39 branches with **1** rate classes
+
+### Improving parameter estimates of the adaptive rate class model
+* Log(L) = -12432.07, AIC-c = 25217.33 (175 estimated parameters)
+* The following rate distribution for site-to-site **synonymous** rate variation was inferred
+
+|               Rate                | Proportion, % |               Notes               |
+|-----------------------------------|---------------|-----------------------------------|
+|               0.217               |    26.516     |                                   |
+|               1.074               |    66.403     |                                   |
+|               3.237               |     7.081     |                                   |
+
+
+### Testing selected branches for selection
+
+|              Branch               |  Rates   |     Max. dN/dS     | Sites @ EBF>=100 |  2x rate   |  3x rate   |      Test LRT      |Uncorrected p-value |
+|-----------------------------------|----------|--------------------|------------------|------------|------------|--------------------|--------------------|
+|        Pipistrellus_kuhlii        |     1    |   0.26 (100.00%)   |       N/A        |    0.08    |    0.00    |        0.00        |       1.00000      |
+|               Node7               |     1    |   0.37 (100.00%)   |       N/A        |    0.15    |    0.00    |        0.00        |       1.00000      |
+|         Molossus_molossus         |     1    |   0.15 (100.00%)   |       N/A        |    0.00    |    0.00    |        0.00        |       1.00000      |
+|               Node6               |     1    |   0.21 (100.00%)   |       N/A        |    0.00    |    0.00    |        0.00        |       1.00000      |
+|      Miniopterus_natalensis       |     1    |   0.25 (100.00%)   |       N/A        |    0.01    |    0.50    |        0.00        |       1.00000      |
+|         Desmodus_rotundus         |     1    |   0.33 (100.00%)   |       N/A        |    0.01    |    0.00    |        0.00        |       1.00000      |
+|     Pteronotus_mesoamericanus     |     1    |   0.37 (100.00%)   |       N/A        |    0.06    |    0.00    |        0.00        |       1.00000      |
+|              Node25               |     1    |   0.20 (100.00%)   |       N/A        |    0.00    |    0.81    |        0.00        |       1.00000      |
+|       Artibeus_jamaicensis        |     1    |   0.27 (100.00%)   |       N/A        |    0.00    |    0.00    |        0.00        |       1.00000      |
+|              Node37               |     1    |   0.14 (100.00%)   |       N/A        |    0.00    |    0.00    |        0.00        |       1.00000      |
+|       Sturnira_hondurensis        |     1    |   0.15 (100.00%)   |       N/A        |    0.00    |    0.00    |        0.00        |       1.00000      |
+|              Node18               |     1    |   0.53 (100.00%)   |       N/A        |    0.00    |    0.00    |        0.00        |       1.00000      |
+|              Node11               |     1    |   0.56 (100.00%)   |       N/A        |    0.00    |    0.00    |        0.00        |       1.00000      |
+|         Eptesicus_fuscus          |     1    |   0.27 (100.00%)   |       N/A        |    0.00    |    0.00    |        0.00        |       1.00000      |
+|       Rousettus_aegyptiacus       |     1    |   0.30 (100.00%)   |       N/A        |    0.09    |    0.00    |        0.00        |       1.00000      |
+|          Myotis_davidii           |     1    |   0.29 (100.00%)   |       N/A        |    0.01    |    0.00    |        0.00        |       1.00000      |
+|               Node2               |     1    |   0.32 (100.00%)   |       N/A        |    0.00    |    0.00    |        0.00        |       1.00000      |
+|              Node13               |     1    |   0.31 (100.00%)   |       N/A        |    0.09    |    0.00    |        0.00        |       1.00000      |
+|              Node15               |     1    |   0.44 (100.00%)   |       N/A        |    0.00    |    0.00    |        0.00        |       1.00000      |
+|              Node26               |     1    |   0.31 (100.00%)   |       N/A        |    0.00    |    0.00    |        0.00        |       1.00000      |
+|          Myotis_brandtii          |     1    |   0.24 (100.00%)   |       N/A        |    0.00    |    0.00    |        0.00        |       1.00000      |
+|         Myotis_yumanensis         |     1    |   0.12 (100.00%)   |       N/A        |    0.00    |    0.00    |        0.00        |       1.00000      |
+|        Myotis_daubentonii         |     1    |   0.18 (100.00%)   |       N/A        |    0.00    |    0.00    |        0.00        |       1.00000      |
+|       Saccopteryx_bilineata       |     1    |   0.34 (100.00%)   |       N/A        |    0.00    |    0.00    |        0.00        |       1.00000      |
+|       Phyllostomus_discolor       |     1    |   0.54 (100.00%)   |       N/A        |    0.00    |    0.00    |        0.00        |       1.00000      |
+|        Saccopteryx_leptura        |     1    |   0.18 (100.00%)   |       N/A        |    0.00    |    0.00    |        0.00        |       1.00000      |
+|         Myotis_lucifugus          |     1    |   0.20 (100.00%)   |       N/A        |    0.00    |    0.00    |        0.00        |       1.00000      |
+|              Node24               |     1    |   0.42 (100.00%)   |       N/A        |    0.11    |    0.00    |        0.00        |       1.00000      |
+|              Node14               |     1    |   0.23 (100.00%)   |       N/A        |    0.00    |    0.00    |        0.00        |       1.00000      |
+|           Myotis_myotis           |     1    |   0.13 (100.00%)   |       N/A        |    0.00    |    0.00    |        0.00        |       1.00000      |
+|              Node32               |     1    |   0.13 (100.00%)   |       N/A        |    0.00    |    0.00    |        0.00        |       1.00000      |
+|              Node22               |     1    |   0.27 (100.00%)   |       N/A        |    0.00    |    0.00    |        0.00        |       1.00000      |
+|          Pteropus_alecto          |     1    |   0.27 (100.00%)   |       N/A        |    0.00    |    0.00    |        0.00        |       1.00000      |
+|       Phyllostomus_hastatus       |     1    |   0.21 (100.00%)   |       N/A        |    0.81    |    0.00    |        0.00        |       1.00000      |
+|         Pteropus_vampyrus         |     1    |   0.20 (100.00%)   |       N/A        |    0.00    |    0.00    |        0.00        |       1.00000      |
+|              Node27               |     1    |   0.21 (100.00%)   |       N/A        |    0.00    |    0.00    |        0.00        |       1.00000      |
+|              Node10               |     1    |  >1000 (100.00%)   |       N/A        |    0.00    |    0.00    |        0.57        |       0.31544      |
+|              Node34               |     1    |   0.73 (100.00%)   |       N/A        |    0.00    |    0.00    |        0.00        |       1.00000      |
+|              Node28               |     1    |   0.00 (100.00%)   |       N/A        |    0.00    |    0.00    |        0.00        |       1.00000      |
+----
+### Adaptive branch site random effects likelihood test 
+Likelihood ratio test for episodic diversifying positive selection at Holm-Bonferroni corrected _p =   0.0500_ found **0** branches under selection among **39** tested.
+

@@ -1,0 +1,97 @@
+
+Analysis Description
+--------------------
+RELAX (a random effects test of selection relaxation) uses a random
+effects branch-site model framework to test whether a set of 'Test'
+branches evolves under relaxed selection relative to a set of
+'Reference' branches (R), as measured by the relaxation parameter (K).
+Version 2.1 adds a check for stability in K estimates to try to mitigate
+convergence problems. Version 3 provides support for >2 branch sets.
+Version 3.1 adds LHC + Nedler-Mead initial fit phase and keyword
+support. Version 3.1.1 adds some bug fixes for better convergence.
+Version 4.0 adds support for synonymous rate variation. Version 4.1 adds
+further support for multiple hit models
+
+- __Requirements__: in-frame codon alignment and a phylogenetic tree, with at least two
+groups of branches defined using the {} notation (one group can be
+defined as all unlabeled branches)
+
+- __Citation__: RELAX: Detecting Relaxed Selection in a Phylogenetic Framework (2015).
+Mol Biol Evol 32 (3): 820-832
+
+- __Written by__: Sergei L Kosakovsky Pond, Ben Murrell, Steven Weaver and Temple iGEM /
+UCSD viral evolution g
+
+- __Contact Information__: spond@temple.edu
+
+- __Analysis Version__: 3.1.1
+
+
+>code –> Universal
+
+
+>Select a coding sequence alignment file (`/home/morpheus/GPRC6A_hyphy/Carnivora_Pholidota/`) Error:
+DataSet(Filter)/Associative Array relax.codon_data has not been properly initialized
+
+Function call stack
+1 :  DataSetFilter ^datafilter_name = CreateFilter(^dataset_name, 3, , , data_info[terms.stop_codons]);
+
+	Keyword arguments:
+		{
+		 "multiple-hits":"Double+Triple",
+		 "output":"splits/Vulpes_lagopus_3_codon_srv_multDoubTrip_out",
+		 "srv":"Yes",
+		 "test":"fg",
+		 "tree":"splits_/group_*.tree.nwk"
+		}
+-------
+2 :  return alignments.LoadCodonDataFile(dataset_name,datafilter_name,alignments.ReadCodonDataSet(dataset_name));
+
+	Keyword arguments:
+		{
+		 "multiple-hits":"Double+Triple",
+		 "output":"splits/Vulpes_lagopus_3_codon_srv_multDoubTrip_out",
+		 "srv":"Yes",
+		 "test":"fg",
+		 "tree":"splits_/group_*.tree.nwk"
+		}
+-------
+3 :  [namespace = relax] codon_data_info=alignments.PromptForGeneticCodeAndAlignment(prefix+".codon_data",prefix+".codon_filter");
+
+	Keyword arguments:
+		{
+		 "multiple-hits":"Double+Triple",
+		 "output":"splits/Vulpes_lagopus_3_codon_srv_multDoubTrip_out",
+		 "srv":"Yes",
+		 "test":"fg",
+		 "tree":"splits_/group_*.tree.nwk"
+		}
+-------
+4 :  [namespace = relax] load_file({utility.getGlobalValue("terms.prefix"):"relax",utility.getGlobalValue("terms.settings"):{utility.getGlobalValue("terms.settings.branch_selector"):"relax.select_branches"}});
+
+	Keyword arguments:
+		{
+		 "multiple-hits":"Double+Triple",
+		 "output":"splits/Vulpes_lagopus_3_codon_srv_multDoubTrip_out",
+		 "srv":"Yes",
+		 "test":"fg",
+		 "tree":"splits_/group_*.tree.nwk"
+		}
+-------
+5 :  namespace 
+
+Step 0.LoadFunctionLibrary("modules/shared-load-file.bf", /home/morpheus/anaconda3/share/hyphy/TemplateBatchFiles/SelectionAnalyses/);
+
+Step 1.load_file({utility.getGlobalValue("terms.prefix"):"relax",utility.getGlobalValue("terms.settings"):{utility.getGlobalValue("terms.settings.branch_selector"):"relax.select_branches"}});
+
+Step 2.LoadFunctionLibrary("modules/grid_compute.ibf", /home/morpheus/anaconda3/share/hyphy/TemplateBatchFiles/SelectionAnalyses/);;
+
+	Keyword arguments:
+		{
+		 "multiple-hits":"Double+Triple",
+		 "output":"splits/Vulpes_lagopus_3_codon_srv_multDoubTrip_out",
+		 "srv":"Yes",
+		 "test":"fg",
+		 "tree":"splits_/group_*.tree.nwk"
+		}
+-------

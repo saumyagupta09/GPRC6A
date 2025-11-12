@@ -1,0 +1,100 @@
+
+Analysis Description
+--------------------
+aBSREL (Adaptive branch-site random effects likelihood) uses an adaptive
+random effects branch-site model framework to test whether each branch
+has evolved under positive selection, using a procedure which infers an
+optimal number of rate categories per branch. v2.2 adds support for
+multiple-hit models. v2.3 adds support for SRV. v2.5 adds support for
+ancestral state reconstruction, identification of sites contributing to
+selection signal, and some diagnostics. 
+
+- __Requirements__: in-frame codon alignment and a phylogenetic tree
+
+- __Citation__:  Less Is More: An Adaptive Branch-Site Random Effects Model for
+Efficient Detection of Episodic Diversifying Selection (2015). Mol Biol
+Evol 32 (5): 1342-1353. 
+
+- __Written by__: Sergei L Kosakovsky Pond, Ben Murrell, Steven Weaver and Temple iGEM /
+UCSD viral evolution group
+
+- __Contact Information__: spond@temple.edu
+
+- __Analysis Version__: 2.5
+
+[Advanced option] Bag of little bootstrap alignment resampling rate (permissible range = [0.01,1], default value = 1): blb: 1
+
+>code => Universal
+/home/morpheus/GPRC6A_hyphy/ABSREL/Eulipotyphla/Eulipotyphla.nwk
+Eulipotyphla.nwk
+
+>Loaded a multiple sequence alignment with **4** sequences, **928** codons, and **1** partitions from `/home/morpheus/GPRC6A_hyphy/ABSREL/Eulipotyphla/codon_alignment.phy`
+
+>branches => All
+
+>multiple-hits => Double
+
+>srv => Yes
+The number omega rate classes to include in the model (permissible range = [1,10], default value = 3, integer): 
+>syn-rates => 3
+
+
+### * Selected 5 branches for testing: `Sorex_fumeus, Sorex_araneus, Node2, Erinaceus_europaeus, Condylura_cristata`
+
+
+### Obtaining branch lengths and nucleotide substitution biases under the nucleotide GTR model
+
+>kill-zero-lengths => Yes
+* Log(L) = -7079.10, AIC-c = 14184.23 (13 estimated parameters)
+* 1 partition. Total tree length by partition (subs/site)  0.289
+
+### Fitting the baseline model with a single dN/dS class per branch, and no site-to-site variation. 
+* Log(L) = -6811.07, AIC-c = 13690.78 (34 estimated parameters)
+* The following rate distribution for site-to-site **synonymous** rate variation was inferred
+
+|               Rate                | Proportion, % |               Notes               |
+|-----------------------------------|---------------|-----------------------------------|
+|               0.000               |     5.583     |                                   |
+|               0.982               |    92.939     |                                   |
+|               5.937               |     1.478     |                                   |
+
+* Branch-level non-synonymous/synonymous rate ratio distribution has median  0.22, and 95% of the weight in  0.19 -  0.40
+* Branch-level rate at which 2 nucleotides are changed instantly within a single codon distribution has median  0.07, and 95% of the weight in  0.00 -  0.23
+
+### Determining the optimal number of rate classes per branch using a step up procedure
+
+|              Branch               |  Length  |  Rates   |     Max. dN/dS     |  2x rate   |    Log(L)     |     AIC-c     |Best AIC-c so far|
+|-----------------------------------|----------|----------|--------------------|------------|---------------|---------------|-----------------|
+|        Erinaceus_europaeus        |   0.10   |    2     |    0.47 (33.31%)   |    0.00    |   -6809.94    |   13692.61    |    13690.78     |
+|        Condylura_cristata         |   0.09   |    2     |    0.23 (59.53%)   |    0.01    |   -6810.94    |   13694.60    |    13690.78     |
+|               Node2               |   0.08   |    2     |    0.17 (75.97%)   |    0.19    |   -6811.05    |   13694.83    |    13690.78     |
+|           Sorex_fumeus            |   0.02   |    2     |    0.26 (19.73%)   |    0.00    |   -6810.17    |   13693.06    |    13690.78     |
+|           Sorex_araneus           |   0.02   |    2     |   0.03 (100.00%)   |    0.00    |   -6811.07    |   13694.86    |    13690.78     |
+
+### Rate class analyses summary
+*  5 branches with **1** rate classes
+
+### Improving parameter estimates of the adaptive rate class model
+* Log(L) = -6797.85, AIC-c = 13664.35 (34 estimated parameters)
+* The following rate distribution for site-to-site **synonymous** rate variation was inferred
+
+|               Rate                | Proportion, % |               Notes               |
+|-----------------------------------|---------------|-----------------------------------|
+|               0.000               |     4.963     |                                   |
+|               1.007               |    94.206     |                                   |
+|               6.219               |     0.831     |                                   |
+
+
+### Testing selected branches for selection
+
+|              Branch               |  Rates   |     Max. dN/dS     | Sites @ EBF>=100 |  2x rate   |      Test LRT      |Uncorrected p-value |
+|-----------------------------------|----------|--------------------|------------------|------------|--------------------|--------------------|
+|        Erinaceus_europaeus        |     1    |   0.17 (100.00%)   |       N/A        |    0.18    |        0.00        |       1.00000      |
+|        Condylura_cristata         |     1    |   0.20 (100.00%)   |       N/A        |    0.09    |        0.00        |       1.00000      |
+|               Node2               |     1    |   0.22 (100.00%)   |       N/A        |    0.26    |        0.00        |       1.00000      |
+|           Sorex_fumeus            |     1    |   0.35 (100.00%)   |       N/A        |    0.09    |        0.00        |       1.00000      |
+|           Sorex_araneus           |     1    |   0.18 (100.00%)   |       N/A        |    0.00    |        0.00        |       1.00000      |
+----
+### Adaptive branch site random effects likelihood test 
+Likelihood ratio test for episodic diversifying positive selection at Holm-Bonferroni corrected _p =   0.0500_ found **0** branches under selection among **5** tested.
+
