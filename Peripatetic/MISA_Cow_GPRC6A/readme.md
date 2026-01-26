@@ -1,4 +1,4 @@
-## Repeats identified using MISA
+## Tandem repeats identified using MISA
 
 [MISA](https://webblast.ipk-gatersleben.de/misa/index.php)
 
